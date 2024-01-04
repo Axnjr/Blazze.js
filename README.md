@@ -1,3 +1,3 @@
 # Blazze.js 
-### A express framework for the web. Write typesafe API's with zero configurations, no boiler-plate code via dynamic directory routing.
+### A light-weight express framework to write typesafe API's with zero configuration, no boiler-plate blazzingly fast.
 ## Comming Soon
