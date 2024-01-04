@@ -1,6 +1,6 @@
 {
     "name": "blazze",
-    "version": "1.1.21-dev",
+    "version": "1.1.0",
     "description": "A express framework for the web. Write Typesafe API's with no configuration and boiler-plate with dynamic directory based routing and intuitive CLI.",
     "main": "index.js",
     "scripts": {
@@ -20,7 +20,12 @@
         "Site builder",
         "Typesafe api's",
         "blazze.js",
-        "Web server"
+        "Web server",
+        "swc",
+        "CLI",
+        "cli",
+        "SWC",
+        "Rest"
     ],
     "author": "Yakshit Chhipa - Axn",
     "license": "ISC",
