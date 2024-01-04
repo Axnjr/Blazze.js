@@ -16,17 +16,9 @@ export const whiteMessage = (...args) => {
     console.log(chalk.whiteBright(...args))
 }
 
-export const infoCyan = (...args) => { 
-    console.log(chalk.cyanBright(...args)); 
-};
-
-export const infoYellowDev = (...args) => {
+export const infoGreyDev = (...args) => {
     if(process.env.devEnviroment == "true")
-        console.log(chalk.yellowBright(...args)) 
-};
-
-export const warn = (...args) => { 
-    console.log(chalk.yellowBright(...args)); 
+        console.log(chalk.gray(...args)) 
 };
 
 export async function chconf() {
@@ -35,7 +27,8 @@ export async function chconf() {
         temp = await import(`file:///${process.cwd().replace(/\\/g, '/')}/blaze.config.js`)
     }
     catch (error) {
-        // warn(`[ ⚠️  Blaze Warning: Cannot read blaze.config.js starting server with default configurations ] - ${JSON.stringify(config, null, 4)}`, "\n")
+        errorRed("[Blazze can't find config file, Run `npx blazze init` to create one]")
+        process.exit(1)
         return config
     }
     return temp.blazeConfig ?? config
