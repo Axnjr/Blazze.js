@@ -5,43 +5,47 @@ import ora from 'ora';
 import { input, confirm } from '@inquirer/prompts';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 
-const deps = TS ? {
-    "express": "latest",
-    "typescript":"latest",
-    // "blazze":"latest",
-    "dotenv": "latest"
-}
-    :
-{
-    "express": "latest",
-    "typescript":"latest",
-    // "blazze":"latest",
-    "dotenv": "latest"
+function getPackageJson(TS){
+    const deps = TS ? {
+        "express": "latest",
+        "typescript":"latest",
+        "blazze":"latest",
+        "dotenv": "latest"
+    }
+        :
+    {
+        "express": "latest",
+        "typescript":"latest",
+        "blazze":"latest",
+        "dotenv": "latest"
+    }
+    
+    const devDeps = TS ? {
+        "@types/express": "latest",
+        "@types/node": "latest",
+    } : {  }
+    
+    return {
+        "name": name,
+        "version": "1.0.0",
+        "private":true,
+        "description": "Created from create-blazze-app",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1",
+          "dev": "blazze-dev",
+          "build": "blazze-build"
+        },
+        "keywords": [],
+        "author": "",
+        "license": "ISC",
+        "dependencies":deps,
+        "devDependencies": devDeps,
+        "type":"module"
+    }
 }
 
-const devDeps = TS ? {
-    "@types/express": "latest",
-    "@types/node": "latest",
-} : {  }
 
-const packageJson = {
-    "name": name,
-    "version": "1.0.0",
-    "private":true,
-    "description": "Created from create-blazze-app",
-    "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "blazze-dev",
-      "build": "blazze-build"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies":deps,
-    "devDependencies": devDeps,
-    "type":"module"
-}
 
 async function BlazeInit() {
 
@@ -80,7 +84,7 @@ async function BlazeInit() {
         mkdirSync(rootEndPoint, { recursive: true });
     }
 
-    writeFileSync("package.json", JSON.stringify(packageJson, null, 4))
+    writeFileSync("package.json", JSON.stringify(getPackageJson(), null, 4))
 
     spinner.succeed();
     console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)
