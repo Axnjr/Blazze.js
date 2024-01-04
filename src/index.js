@@ -14,9 +14,9 @@ const require = createRequire(import.meta.url);
 const scriptToRun =
     process.env.devEnviroment == "true"
         ?
-    "dev.js"
+    "src/dev.js"
         :
-    require.resolve("blazze").replace("index.js", "") + "/dev.js"
+    require.resolve("blazze").replace("index.js", "") + "/src/dev.js"
 ;
 
 const config = await chconf()
@@ -60,8 +60,8 @@ function greenArrow(){
     return chalk.greenBright("➜ ")
 }
 
-console.log(chalk.gray(
-`${chalk.bold.rgb(98, 0, 255)(`✦  Blazze.js v.${packageVersion} `)}
+console.log(chalk.gray(`
+${chalk.bold.rgb(98, 0, 255)(`✦  Blazze.js v.${packageVersion} `)}
     ${greenArrow()} Local: ${chalk.cyanBright(`http://localhost:${config.port}/${config.rootEndPoint}`)}
     ${greenArrow()} Config: blaze.config.js
     ${greenArrow()} Running in ${chalk.cyanBright(config.TS ? "TypeScript" : "JavaScript")}

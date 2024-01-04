@@ -5,6 +5,44 @@ import ora from 'ora';
 import { input, confirm } from '@inquirer/prompts';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 
+const deps = TS ? {
+    "express": "latest",
+    "typescript":"latest",
+    // "blazze":"latest",
+    "dotenv": "latest"
+}
+    :
+{
+    "express": "latest",
+    "typescript":"latest",
+    // "blazze":"latest",
+    "dotenv": "latest"
+}
+
+const devDeps = TS ? {
+    "@types/express": "latest",
+    "@types/node": "latest",
+} : {  }
+
+const packageJson = {
+    "name": name,
+    "version": "1.0.0",
+    "private":true,
+    "description": "Created from create-blazze-app",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "dev": "blazze-dev",
+      "build": "blazze-build"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies":deps,
+    "devDependencies": devDeps,
+    "type":"module"
+}
+
 async function BlazeInit() {
 
     const name = await input({
@@ -42,44 +80,6 @@ async function BlazeInit() {
         mkdirSync(rootEndPoint, { recursive: true });
     }
 
-    const deps = TS ? {
-        "express": "latest",
-        "typescript":"latest",
-        // "blazze":"latest",
-        "dotenv": "latest"
-    }
-        :
-    {
-        "express": "latest",
-        "typescript":"latest",
-        // "blazze":"latest",
-        "dotenv": "latest"
-    }
-
-    const devDeps = TS ? {
-        "@types/express": "latest",
-        "@types/node": "latest",
-    } : {  }
-
-    const packageJson = {
-        "name": name,
-        "version": "1.0.0",
-        "private":true,
-        "description": "Created from create-blazze-app",
-        "main": "index.js",
-        "scripts": {
-          "test": "echo \"Error: no test specified\" && exit 1",
-          "dev": "blazze-dev",
-          "build": "blazze-build"
-        },
-        "keywords": [],
-        "author": "",
-        "license": "ISC",
-        "dependencies":deps,
-        "devDependencies": devDeps,
-        "type":"module"
-    }
-
     writeFileSync("package.json", JSON.stringify(packageJson, null, 4))
 
     spinner.succeed();
@@ -89,7 +89,7 @@ async function BlazeInit() {
         - npm i
         - npm run dev
     `))
-    console.log(chalk.bgBlack(chalk.rgb(247,15,234)(` You are ready to Blazze 🚀. Refer docs at http://blazze/docs. `)))
+    console.log(chalk.bold.rgb(98, 0, 255)(`You are ready to Blazze 🚀. Refer docs at http://blazze/docs.`))
 
 }
 
