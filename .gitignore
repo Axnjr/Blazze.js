@@ -3,3 +3,5 @@ node_modules
 blaze.cache.json
 
 blaze.config.js
+
+blaze.build.js
