@@ -4,7 +4,7 @@ export default async function (req:Request,res:Response){
     let t = req.query
     let b = req.params
     res.json({
-        Mes:"Dynamic nested route test",
+        Mes:"Dynamic nested route test with swc.",
         Status:"ok",
         Code:200,
         T:t,

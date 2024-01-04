@@ -132,7 +132,7 @@ function _ref() {
             t = req.query;
             b = req.params;
             res.json({
-                Mes: "Dynamic nested route test",
+                Mes: "Dynamic nested route test with swc.",
                 Status: "ok",
                 Code: 200,
                 T: t,
