@@ -5,47 +5,6 @@ import ora from 'ora';
 import { input, confirm } from '@inquirer/prompts';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 
-function getPackageJson(TS){
-    const deps = TS ? {
-        "express": "latest",
-        "typescript":"latest",
-        "blazze":"latest",
-        "dotenv": "latest"
-    }
-        :
-    {
-        "express": "latest",
-        "typescript":"latest",
-        "blazze":"latest",
-        "dotenv": "latest"
-    }
-    
-    const devDeps = TS ? {
-        "@types/express": "latest",
-        "@types/node": "latest",
-    } : {  }
-    
-    return {
-        "name": name,
-        "version": "1.0.0",
-        "private":true,
-        "description": "Created from create-blazze-app",
-        "main": "index.js",
-        "scripts": {
-          "test": "echo \"Error: no test specified\" && exit 1",
-          "dev": "blazze-dev",
-          "build": "blazze-build"
-        },
-        "keywords": [],
-        "author": "",
-        "license": "ISC",
-        "dependencies":deps,
-        "devDependencies": devDeps,
-        "type":"module"
-    }
-}
-
-
 
 async function BlazeInit() {
 
@@ -84,7 +43,7 @@ async function BlazeInit() {
         mkdirSync(rootEndPoint, { recursive: true });
     }
 
-    writeFileSync("package.json", JSON.stringify(getPackageJson(), null, 4))
+    writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
 
     spinner.succeed();
     console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)
@@ -95,6 +54,47 @@ async function BlazeInit() {
     `))
     console.log(chalk.bold.rgb(98, 0, 255)(`You are ready to Blazze 🚀. Refer docs at http://blazze/docs.`))
 
+}
+
+
+function getPackageJson(TS,name){
+    const deps = TS ? {
+        "express": "latest",
+        "typescript":"latest",
+        "blazze":"latest",
+        "dotenv": "latest"
+    }
+        :
+    {
+        "express": "latest",
+        "typescript":"latest",
+        "blazze":"latest",
+        "dotenv": "latest"
+    }
+    
+    const devDeps = TS ? {
+        "@types/express": "latest",
+        "@types/node": "latest",
+    } : {  }
+    
+    return {
+        "name": name,
+        "version": "1.0.0",
+        "private":true,
+        "description": "Created from create-blazze-app",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1",
+          "dev": "blazze-dev",
+          "build": "blazze-build"
+        },
+        "keywords": [],
+        "author": "",
+        "license": "ISC",
+        "dependencies":deps,
+        "devDependencies": devDeps,
+        "type":"module"
+    }
 }
 
 BlazeInit();
