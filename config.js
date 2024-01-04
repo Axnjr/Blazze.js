@@ -80,9 +80,7 @@ async function BlazeInit() {
         "type":"module"
     }
 
-    // writeFileSync("package.json", JSON.stringify(packageJson, null, 4))
-
-    // tsConfig.js
+    writeFileSync("package.json", JSON.stringify(packageJson, null, 4))
 
     spinner.succeed();
     console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)
