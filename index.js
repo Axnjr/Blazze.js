@@ -8,7 +8,9 @@ import { writeFileSync } from "fs";
 import { revalidateCache } from "./cache.js";
 
 const packageVersion = "1.24.1"
+
 const require = createRequire(import.meta.url);
+
 const scriptToRun =
     process.env.devEnviroment == "true"
         ?
@@ -16,6 +18,7 @@ const scriptToRun =
         :
     require.resolve("blazze").replace("index.js", "") + "/dev.js"
 ;
+
 const config = await chconf()
 
 async function transpileTs(routeToTsFile) {
@@ -42,20 +45,26 @@ async function transpileTs(routeToTsFile) {
     return
 }
 
-nodemon({
+await nodemon({
     script: scriptToRun,
     ext: config.TS ? "ts" : "js",  // File extensions to watch for changes
     watch: [config.rootEndPoint],  // Watch only the specified file for changes
 })
 
 .on('restart', async (file) => {
-    transpileTs(file)
+    if(config.TS)
+        transpileTs(file)
 });
 
-console.log(chalk.gray(`
-    ${chalk.bold.rgb(98, 0, 255)(`✦  Blazze.js ${packageVersion} `)}
-    - Local: http://localhost:${config.port}/${config.rootEndPoint}
-    - Config: blaze.config.js
+function greenArrow(){
+    return chalk.greenBright("➜ ")
+}
+
+console.log(chalk.gray(
+`${chalk.bold.rgb(98, 0, 255)(`✦  Blazze.js v.${packageVersion} `)}
+    ${greenArrow()} Local: ${chalk.cyanBright(`http://localhost:${config.port}/${config.rootEndPoint}`)}
+    ${greenArrow()} Config: blaze.config.js
+    ${greenArrow()} Running in ${chalk.cyanBright(config.TS ? "TypeScript" : "JavaScript")}
 `))
 
 revalidateCache("Revalidating at server start")
