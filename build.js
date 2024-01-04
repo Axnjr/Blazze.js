@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync, existsSync, appendFileSync } from "fs";
-import * as compress from "uglify-js"
-import { chconf, infoCyan} from "./chconf.js"
+import swc from "@swc/core"
+import { chconf} from "./chconf.js"
+import chalk from "chalk";
 
 const config = await chconf() ?? {
     rootEndPoint: "api/v1",
@@ -10,7 +11,7 @@ const config = await chconf() ?? {
     staticRoot: "public"
 };
 
-const starterCode = `import express from "express";const x=express();x.use(express.static(\`${config.staticRoot ?? "public"}\`));x.listen(\`${config.port}\`,()=>{console.log("[YOUR APP IS RUNNING ON PORT \`${config.port}\`]")})`;
+const starterCode = `import express from "express";const x=express();x.use(express.static(\`${config.staticRoot ?? "public"}\`));x.listen(\`${config.port}\`,()=>{console.log("App running on port: \`${config.port}\`")})`;
 
 class BlazeBuild {
 
@@ -40,11 +41,11 @@ class BlazeBuild {
                 let path = `${config.rootEndPoint}/${route}`,
                 funcName = this.generateFuncName(),
                 temp = readFileSync(`${process.cwd()}/${path}/${method}.js`, "utf-8")
-                    .replaceAll("export default","")
-                    .replaceAll("function", `function ${funcName}`),
+                    .replace("export default function",`function ${funcName}`),
+                    // .replaceAll("function", `function ${funcName}`),
                 routeCode;
 
-                temp = compress.minify(temp).code
+                temp = swc.minifySync(temp).code //compress.minify(temp).code
                 if (route.includes("@")) {
                     route = route.replaceAll("@", "/");
                 } 
@@ -62,7 +63,7 @@ class BlazeBuild {
                 appendFileSync(`${process.cwd()}/blaze.build.js`, ";\n"+routeCode+";\n"+temp)
             });
         }
-        infoCyan("[🌩️ YOUR OPTIMIZED BLAZE BUILD CREATED 🥳💥]");
+        console.log(chalk.bold.rgb(98, 0, 255)("Your optimized Blazze build was created successfully 🎉🚀"))
     }
 
 }

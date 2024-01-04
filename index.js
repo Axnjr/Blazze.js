@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 import chalk from "chalk";
 import { createRequire } from "module";
-import { chconf, errorRed, whiteMessage, infoCyan } from "./chconf.js"
+import { chconf, errorRed, whiteMessage } from "./chconf.js"
 import nodemon from "nodemon";
 import swc from "@swc/core"
 import { writeFileSync } from "fs";
+import { revalidateCache } from "./cache.js";
 
-const packageVersion = "1.2.1"
+const packageVersion = "1.24.1"
 const require = createRequire(import.meta.url);
 const scriptToRun =
     process.env.devEnviroment == "true"
@@ -18,22 +19,20 @@ const scriptToRun =
 const config = await chconf()
 
 async function transpileTs(routeToTsFile) {
-
     let 
         t = routeToTsFile[0].replaceAll("\\","/").split(config.rootEndPoint),
         start = performance.now(),
         jsFromTs
     ;
 
-    whiteMessage("○ Blaze Transpiling TypeScript /", routeToTsFile)
+    whiteMessage(chalk.cyanBright("o"),"Blaze Transpiling TypeScript /", routeToTsFile)
 
     try {
         jsFromTs = await swc.transformFile(config.rootEndPoint + t[1])
         writeFileSync(config.rootEndPoint+t[1].replace("ts","js"), jsFromTs.code)
 
         let end = performance.now()
-        whiteMessage(`✓ Ready in ${(end - start).toFixed(2)}ms`)
-
+        whiteMessage(chalk.greenBright("✓"),`Ready in ${chalk.greenBright((end - start).toFixed(2))} ms`)
     } 
 
     catch (error) {
@@ -50,13 +49,13 @@ nodemon({
 })
 
 .on('restart', async (file) => {
-    infoCyan("Restarting blazze ...")
     transpileTs(file)
 });
 
-console.log(
-    chalk.rgb(247,15,234)(`▩ Blazze.js ${packageVersion}`),
-    chalk.whiteBright("|"),
-    chalk.greenBright.bold(`✓`),
-    chalk.whiteBright(`Started Root Endpoint: http://localhost:${config.port}/${config.rootEndPoint}`
-))
+console.log(chalk.gray(`
+    ${chalk.bold.rgb(98, 0, 255)(`✦  Blazze.js ${packageVersion} `)}
+    - Local: http://localhost:${config.port}/${config.rootEndPoint}
+    - Config: blaze.config.js
+`))
+
+revalidateCache("Revalidating at server start")
