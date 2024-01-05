@@ -1,18 +1,22 @@
 #!/usr/bin/env node
 import chalk from "chalk";
-// import { createRequire } from "module";
 import { chconf, errorRed, whiteMessage } from "./src/chconf.js"
 import nodemon from "nodemon";
 import swc from "@swc/core"
-import { writeFileSync } from "fs";
+import { existsSync, writeFileSync, mkdirSync } from "fs";
 import { revalidateCache } from "./src/cache.js";
-
-const packageVersion = "1.24.1"
-
-// const require = createRequire(import.meta.url);
 
 const config = await chconf()
 
+if(config.TS){
+    let temp = config.resolvePath+`ts/${config.rootEndPoint}`
+    // console.log(config.resolvePath+`ts/${config.rootEndPoint}`)
+    if(!existsSync(temp)){
+        mkdirSync(temp, { recursive: true })
+    } 
+}
+
+const packageVersion = "1.24.1"
 const scriptToRun =
     process.env.devEnviroment == "true"
         ?
@@ -20,6 +24,30 @@ const scriptToRun =
         :
     config.resolvePath+"/src/dev.js"
 ;
+
+await nodemon({
+    script: scriptToRun,
+    ext: config.TS ? "ts" : "js",  // File extensions to watch for changes
+    watch: [config.rootEndPoint],  // Watch only the specified file for changes
+})
+
+.on('restart', async (file) => {
+    if(config.TS)
+        transpileTs(file)
+});
+
+console.log(chalk.gray(`
+${chalk.bold.rgb(98, 0, 255)(`✦  Blazze.js v.${packageVersion} `)}
+${greenArrow()} Local: ${chalk.cyanBright(`http://localhost:${config.port}/${config.rootEndPoint}`)}
+${greenArrow()} Config: blaze.config.js
+${greenArrow()} Running in ${chalk.cyanBright(config.TS ? "TypeScript" : "JavaScript")}
+`))
+
+revalidateCache("Revalidating at server start")
+
+function greenArrow(){
+    return chalk.greenBright("➜ ")
+}
 
 async function transpileTs(routeToTsFile) {
     let 
@@ -49,27 +77,3 @@ async function transpileTs(routeToTsFile) {
 
     return
 }
-
-await nodemon({
-    script: scriptToRun,
-    ext: config.TS ? "ts" : "js",  // File extensions to watch for changes
-    watch: [config.rootEndPoint],  // Watch only the specified file for changes
-})
-
-.on('restart', async (file) => {
-    if(config.TS)
-        transpileTs(file)
-});
-
-function greenArrow(){
-    return chalk.greenBright("➜ ")
-}
-
-console.log(chalk.gray(`
-${chalk.bold.rgb(98, 0, 255)(`✦  Blazze.js v.${packageVersion} `)}
-    ${greenArrow()} Local: ${chalk.cyanBright(`http://localhost:${config.port}/${config.rootEndPoint}`)}
-    ${greenArrow()} Config: blaze.config.js
-    ${greenArrow()} Running in ${chalk.cyanBright(config.TS ? "TypeScript" : "JavaScript")}
-`))
-
-revalidateCache("Revalidating at server start")
