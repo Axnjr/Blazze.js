@@ -31,7 +31,9 @@ async function transpileTs(routeToTsFile) {
     whiteMessage(chalk.cyanBright("o"),"Blaze Transpiling TypeScript /", routeToTsFile)
 
     try {
-        jsFromTs = await swc.transformFile(config.rootEndPoint + t[1])
+        jsFromTs = await swc.transformFile(config.rootEndPoint + t[1],{
+            swcrc:true
+        })
         writeFileSync(config.rootEndPoint+t[1].replace("ts","js"), jsFromTs.code)
 
         let end = performance.now()
