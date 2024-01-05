@@ -122,11 +122,8 @@ function _ts_generator(thisArg, body) {
         };
     }
 }
-export default function(req, res) {
-    return _ref.apply(this, arguments);
-}
-function _ref() {
-    _ref = _async_to_generator(function(req, res) {
+export default (function() {
+    var _ref = _async_to_generator(function(req, res) {
         var t, b;
         return _ts_generator(this, function(_state) {
             t = req.query;
@@ -143,5 +140,7 @@ function _ref() {
             ];
         });
     });
-    return _ref.apply(this, arguments);
-}
+    return function(req, res) {
+        return _ref.apply(this, arguments);
+    };
+})();

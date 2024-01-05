@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-export default async function (req:Request,res:Response){
+export default async (req:Request,res:Response) => {
     let t = req.query
     let b = req.params
     res.json({
