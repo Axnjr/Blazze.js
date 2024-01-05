@@ -11,6 +11,8 @@ const packageVersion = "1.24.1"
 
 // const require = createRequire(import.meta.url);
 
+const config = await chconf()
+
 const scriptToRun =
     process.env.devEnviroment == "true"
         ?
@@ -18,8 +20,6 @@ const scriptToRun =
         :
     config.resolvePath+"/src/dev.js"
 ;
-
-const config = await chconf()
 
 async function transpileTs(routeToTsFile) {
     let 
