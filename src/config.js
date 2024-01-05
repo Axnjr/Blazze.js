@@ -1,10 +1,12 @@
 #!/usr/bin/env node
-
 import chalk from 'chalk';
 import ora from 'ora';
 import { input, confirm } from '@inquirer/prompts';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { createRequire } from "module";
 
+const require = createRequire(import.meta.url);
+const resolvePath = require.resolve("blazze").replace("index.js","")
 
 async function BlazeInit() {
 
@@ -28,7 +30,7 @@ async function BlazeInit() {
         message: chalk.whiteBright("Where would you like to keep your static conetent like html, png's files ?"),
         default: "public"
     });
-    const spinner = ora(chalk.bgBlack.rgb(247,15,234)(" Configuring your Blazze App ")).start();
+    const spinner = ora(chalk.bold.rgb(98, 0, 255)(" Configuring your Blazze App ")).start();
 
     await new Promise(resolve => { setTimeout(() => { resolve() }, 500) })
 
@@ -36,14 +38,15 @@ async function BlazeInit() {
         rootEndPoint: rootEndPoint,
         TS: TS,
         port: port,
-        staticRoot: staticRoot
+        staticRoot: staticRoot,
+        resolvePath:resolvePath
     }, null, 4)}`);
+
+    writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
 
     if(!existsSync(rootEndPoint)){
         mkdirSync(rootEndPoint, { recursive: true });
     }
-
-    writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
 
     spinner.succeed();
     console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync, existsSync, appendFileSync } from "fs";
 import swc from "@swc/core"
-import { chconf} from "./chconf.js"
+import { chconf } from "./chconf.js"
 import chalk from "chalk";
 
 const config = await chconf() ?? {
@@ -19,6 +19,7 @@ class BlazeBuild {
 
     constructor() {
         this.cache = JSON.parse(readFileSync("blaze.cache.json", "utf-8"));
+        this.lang = config.TS ? "ts" : "js";
         if (!existsSync("/blaze.build.js")) {
             writeFileSync(`${process.cwd()}/blaze.build.js`, starterCode, "utf-8");
         }
@@ -37,32 +38,45 @@ class BlazeBuild {
 
     _runBuild() {
         for (const [method, routes] of Object.entries(this.cache)) {
+
             routes.forEach(route => {
-                let path = `${config.rootEndPoint}/${route}`,
-                funcName = this.generateFuncName(),
-                temp = readFileSync(`${process.cwd()}/${path}/${method}.js`, "utf-8")
-                    .replace("export default function",`function ${funcName}`),
-                    // .replaceAll("function", `function ${funcName}`),
-                routeCode;
+
+                let pathToFile = this.lang == "ts"
+                        ?
+                    `${config.resolvePath}/ts/${config.rootEndPoint}/.${route + "." + method}.js`
+                        :
+                    `${process.cwd()}/${config.rootEndPoint}/${route}/${method}.js`,
+
+                    funcName = this.generateFuncName(),
+                    routeCode
+                ;
+
+                let temp = readFileSync(pathToFile, "utf-8")
+                    .replace("export default function",`function ${funcName}`);
 
                 temp = swc.minifySync(temp).code //compress.minify(temp).code
+
                 if (route.includes("@")) {
                     route = route.replaceAll("@", "/");
-                } 
+                }
+
                 // for nested routes
                 if (route.includes("_")) {
                     route = route.replaceAll("_", ":");
-                } 
+                }
+
                 // for dynamic routes
                 const boilerPlate = `async(a,s)=>{try{ let v = await ${funcName}(a,s)}catch(e){ console.error("[Blazze error in build:]",e);s.status(500).send(JSON.stringify({e})) }}`;
-                if(method == "GET"){ routeCode = `x.get("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
-                if(method == "POST"){ routeCode = `x.post("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
-                if(method == "PUT"){ routeCode = `x.put("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
-                if(method == "DELETE"){ routeCode = `x.delete("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
-                if(method == "PATCH"){ routeCode = `x.patch("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
-                appendFileSync(`${process.cwd()}/blaze.build.js`, ";\n"+routeCode+";\n"+temp)
+                if (method == "GET") { routeCode = `x.get("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
+                if (method == "POST") { routeCode = `x.post("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
+                if (method == "PUT") { routeCode = `x.put("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
+                if (method == "DELETE") { routeCode = `x.delete("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
+                if (method == "PATCH") { routeCode = `x.patch("/${config.rootEndPoint}/${route}", ${boilerPlate});` }
+
+                appendFileSync(`${process.cwd()}/blaze.build.js`, ";\n" + routeCode + ";\n" + temp)
             });
         }
+
         console.log(chalk.bold.rgb(98, 0, 255)("Your optimized Blazze build was created successfully 🎉🚀"))
     }
 
