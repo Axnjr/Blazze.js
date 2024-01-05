@@ -107,17 +107,24 @@ class Blaze {
     }
 
     async _getMethodCallback(route, methodFile) {
-        let methodCallback = await import(`file:///${process.cwd().replace(/\\/g, '/')}/${config.rootEndPoint}/${route}/${methodFile}.js`);
+
+        let pathToFile = this.lang == "ts" 
+            ? 
+        `file:///${config.resolvePath}/ts/${config.rootEndPoint}/.${route+"."+methodFile}.js`
+            :
+        `file:///${process.cwd()}/${config.rootEndPoint}/${route}/${methodFile}.js`
+
+        let methodCallback = await import(pathToFile);
 
         if (methodCallback == undefined || methodCallback.default == undefined) {
 
-            errorRed(`[Blaze Error]: No default function was exported from the "${methodFile}.${this.lang}" file in route "${route}". \n ${safe("Did you forgot to add export default ??")}`);
+            errorRed(`[Blaze Error]: No default function was exported from the "${methodFile}.${this.lang}" file in route "${route}". ${safe("Did you forgot to add export default ??")}`);
 
             process.exit(1);
         }   
 
         if(this.isArrowFunc(methodCallback.default)){
-            warning(`[Blazze warning]: You are exporting a arrow functions from file ${route}/${methodFile}.${this.lang}, it could ${danger("cause build errors")} on running "npm run build". \nConsider ${safe("converting it normal function")} to fix this warning !!`)
+            warning(`[Blazze warning]: You are exporting a arrow functions from file ${route}/${methodFile}.${this.lang}, it could ${danger("cause build errors")} on running "npm run build". Consider ${safe("converting it normal function")} to fix this warning !!`)
         }
 
         return methodCallback.default;
