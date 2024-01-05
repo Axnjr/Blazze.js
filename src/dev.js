@@ -110,7 +110,7 @@ class Blaze {
 
         let pathToFile = this.lang == "ts" 
             ? 
-        `file:///${config.resolvePath}/ts/${config.rootEndPoint}/.${route+"."+methodFile}.js`
+        `file:///${process.cwd()}/blazze/.${route+"."+methodFile}.js`
             :
         `file:///${process.cwd()}/${config.rootEndPoint}/${route}/${methodFile}.js`
 
