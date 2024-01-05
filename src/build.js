@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync, existsSync, appendFileSync } from "fs";
 import swc from "@swc/core"
-import { chconf} from "./chconf.js"
+import { chconf, whiteMessage} from "./chconf.js"
 import chalk from "chalk";
 
 const config = await chconf() ?? {
@@ -35,17 +35,23 @@ class BlazeBuild {
         return randomName;
     }
 
+
     _runBuild() {
+
         for (const [method, routes] of Object.entries(this.cache)) {
+
             routes.forEach(route => {
-                let path = `${config.rootEndPoint}/${route}`,
-                funcName = this.generateFuncName(),
-                temp = readFileSync(`${process.cwd()}/${path}/${method}.js`, "utf-8")
-                    .replace("export default function",`function ${funcName}`),
-                    // .replaceAll("function", `function ${funcName}`),
-                routeCode;
+
+                let 
+                    path = `${config.rootEndPoint}/${route}`,
+                    funcName = this.generateFuncName(),
+                    temp = readFileSync(`${process.cwd()}/${path}/${method}.js`, "utf-8")
+                            .replace("export default function",`function ${funcName}`),
+                    routeCode
+                ;
 
                 temp = swc.minifySync(temp).code //compress.minify(temp).code
+
                 if (route.includes("@")) {
                     route = route.replaceAll("@", "/");
                 } 
@@ -63,6 +69,7 @@ class BlazeBuild {
                 appendFileSync(`${process.cwd()}/blaze.build.js`, ";\n"+routeCode+";\n"+temp)
             });
         }
+
         console.log(chalk.bold.rgb(98, 0, 255)("Your optimized Blazze build was created successfully 🎉🚀"))
     }
 
