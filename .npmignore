@@ -9,3 +9,9 @@ blaze.cache.json
 blaze.config.js
 
 package-lock.json
+
+.github
+
+blazze
+
+blaze.build.js 
