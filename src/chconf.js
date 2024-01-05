@@ -16,6 +16,18 @@ export const whiteMessage = (...args) => {
     console.log(chalk.whiteBright(...args))
 }
 
+export const warning = (...args) => {
+    console.log(chalk.bold.yellowBright(...args))
+}
+
+export const safe = (...args) => {
+    return chalk.bold.greenBright(...args)
+}
+
+export const danger = (...args) => {
+    return chalk.bold.redBright(...args)
+}
+
 export const infoGreyDev = (...args) => {
     if(process.env.devEnviroment == "true")
         console.log(chalk.gray(...args)) 
