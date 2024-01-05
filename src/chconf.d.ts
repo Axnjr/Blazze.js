@@ -3,6 +3,7 @@ export interface config {
     TS: string;
     port: string;
     staticRoot: string;
+    resolvePath:string;
 }
 export function chconf() : Promise<config>
 export function whiteMessage() : void

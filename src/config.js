@@ -4,7 +4,10 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { input, confirm } from '@inquirer/prompts';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { createRequire } from "module";
 
+const require = createRequire(import.meta.url);
+const resolvePath = require.resolve("blazze").replace("index.js","")
 
 async function BlazeInit() {
 
@@ -36,14 +39,16 @@ async function BlazeInit() {
         rootEndPoint: rootEndPoint,
         TS: TS,
         port: port,
-        staticRoot: staticRoot
+        staticRoot: staticRoot,
+        resolvePath:resolvePath
     }, null, 4)}`);
 
     if(!existsSync(rootEndPoint)){
         mkdirSync(rootEndPoint, { recursive: true });
+        TS ?? mkdirSync(resolvePath+`ts/${rootEndPoint}`, { recursive: true })
     }
 
-    writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
+    // writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
 
     spinner.succeed();
     console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)
