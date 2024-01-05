@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import chalk from 'chalk';
 import ora from 'ora';
 import { input, confirm } from '@inquirer/prompts';
@@ -43,12 +42,11 @@ async function BlazeInit() {
         resolvePath:resolvePath
     }, null, 4)}`);
 
+    writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
+
     if(!existsSync(rootEndPoint)){
         mkdirSync(rootEndPoint, { recursive: true });
-        TS ?? mkdirSync(resolvePath+`ts/${rootEndPoint}`, { recursive: true })
     }
-
-    writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
 
     spinner.succeed();
     console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)

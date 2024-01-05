@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import express from "express";
 import { readFileSync, watch } from "fs";
 import { chconf, errorRed, infoGreyDev, warning, safe, danger } from "./chconf.js"
@@ -99,11 +98,12 @@ class Blaze {
 
     isArrowFunc(func){
         // this is for dev edge case swc transpilation problem
-        let b = func.toString().includes("return")
+        // let b = func.toString().includes("return")
         // for arrow functions hasOwnPoperty would be false and true for normal funcs
         let t = func.prototype == undefined && !func.hasOwnProperty('arguments');
         // console.log("Checking if arrow func",func.toString(),t)
-        return b || t
+        // return b || t
+        return t
     }
 
     async _getMethodCallback(route, methodFile) {
