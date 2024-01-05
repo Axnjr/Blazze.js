@@ -16,7 +16,7 @@ if(config.TS){
     } 
 }
 
-const packageVersion = "1.24.1"
+const packageVersion = "1.0.3"
 const scriptToRun =
     process.env.devEnviroment == "true"
         ?
@@ -64,7 +64,7 @@ async function transpileTs(routeToTsFile) {
             swcrc:true
         })
 
-        writeFileSync(`${config.resolvePath}/ts/${config.rootEndPoint}/${t[1].replaceAll("/",".").replace("ts","js")}`, jsFromTs.code)
+        writeFileSync(`blazze/${t[1].replaceAll("/",".").replace("ts","js")}`, jsFromTs.code)
         // writeFileSync(config.rootEndPoint+t[1].replace("ts","js"), jsFromTs.code)
 
         let end = performance.now()

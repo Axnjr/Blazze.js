@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync, existsSync, appendFileSync } from "fs";
 import swc from "@swc/core"
-import { chconf } from "./chconf.js"
+import { chconf, errorRed } from "./chconf.js"
 import chalk from "chalk";
 
 const config = await chconf() ?? {
@@ -43,7 +43,7 @@ class BlazeBuild {
 
                 let pathToFile = this.lang == "ts"
                         ?
-                    `${config.resolvePath}/ts/${config.rootEndPoint}/.${route + "." + method}.js`
+                    `blazze/.${route + "." + method}.js`
                         :
                     `${process.cwd()}/${config.rootEndPoint}/${route}/${method}.js`,
 
@@ -52,9 +52,18 @@ class BlazeBuild {
                 ;
 
                 let temp = readFileSync(pathToFile, "utf-8")
-                    .replace("export default function",`function ${funcName}`);
+                    .replace("export default function",`function ${funcName}`)
+                    .replace(/asyncGeneratorStep/g,this.generateFuncName())
+                    .replace(/_async_to_generator/g,this.generateFuncName())
+                    .replace(/_ts_generator/g,this.generateFuncName())
+                    .replace(/_ref/g,this.generateFuncName())
+                ;
 
-                temp = swc.minifySync(temp).code //compress.minify(temp).code
+                try {
+                    temp = swc.minifySync(temp).code //compress.minify(temp).code
+                } catch (error) {
+                    errorRed("[Blazze unable to compress build] -",error)
+                }
 
                 if (route.includes("@")) {
                     route = route.replaceAll("@", "/");
