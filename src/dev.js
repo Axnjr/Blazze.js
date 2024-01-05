@@ -2,7 +2,7 @@
 
 import express from "express";
 import { readFileSync, watch } from "fs";
-import { chconf, errorRed, infoGreyDev } from "./chconf.js"
+import { chconf, errorRed, infoGreyDev, warning, safe, danger } from "./chconf.js"
 import { revalidateCache } from "./cache.js";
 
 const app = express();
@@ -18,6 +18,7 @@ class Blaze {
         this._listenToChanges();
         this.cache = JSON.parse(readFileSync(`./blaze.cache.json`, "utf-8"));
         this._startBlazeServer();
+        this.lang = config.TS ? "ts" : "js";
         return;
     }
 
@@ -96,18 +97,28 @@ class Blaze {
         });
     }
 
+    isArrowFunc(func){
+        // this is for dev edge case swc transpilation problem
+        let b = func.toString().includes("return")
+        // for arrow functions hasOwnPoperty would be false and true for normal funcs
+        let t = func.prototype == undefined && !func.hasOwnProperty('arguments');
+        // console.log("Checking if arrow func",func.toString(),t)
+        return b || t
+    }
+
     async _getMethodCallback(route, methodFile) {
         let methodCallback = await import(`file:///${process.cwd().replace(/\\/g, '/')}/${config.rootEndPoint}/${route}/${methodFile}.js`);
 
         if (methodCallback == undefined || methodCallback.default == undefined) {
 
-            errorRed(`
-				[Blaze Error] - No default function was exported from the "${methodFile}.js/.ts"
-				file in route "${route}". Did you forgot to add export default ??
-			`);
+            errorRed(`[Blaze Error]: No default function was exported from the "${methodFile}.${this.lang}" file in route "${route}". \n ${safe("Did you forgot to add export default ??")}`);
 
             process.exit(1);
         }   
+
+        if(this.isArrowFunc(methodCallback.default)){
+            warning(`[Blazze warning]: You are exporting a arrow functions from file ${route}/${methodFile}.${this.lang}, it could ${danger("cause build errors")} on running "npm run build". \nConsider ${safe("converting it normal function")} to fix this warning !!`)
+        }
 
         return methodCallback.default;
     }
