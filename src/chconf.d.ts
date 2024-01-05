@@ -1,6 +1,6 @@
 export interface config {
     rootEndPoint: string;
-    TS: string;
+    TS: boolean;
     port: string;
     staticRoot: string;
     resolvePath:string;
