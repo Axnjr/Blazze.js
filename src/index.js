@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import chalk from "chalk";
 import { createRequire } from "module";
-import { chconf, errorRed, whiteMessage } from "./src/chconf.js"
+import { chconf, errorRed, whiteMessage } from "./chconf.js"
 import nodemon from "nodemon";
 import swc from "@swc/core"
 import { writeFileSync } from "fs";
-import { revalidateCache } from "./src/cache.js";
+import { revalidateCache } from "./cache.js";
 
 const packageVersion = "1.24.1"
 

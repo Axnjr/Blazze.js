@@ -5,6 +5,7 @@ import ora from 'ora';
 import { input, confirm } from '@inquirer/prompts';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 
+
 async function BlazeInit() {
 
     const name = await input({
@@ -42,26 +43,41 @@ async function BlazeInit() {
         mkdirSync(rootEndPoint, { recursive: true });
     }
 
+    writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
+
+    spinner.succeed();
+    console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)
+    console.log(chalk.whiteBright(`Run commands:
+
+        - npm i
+        - npm run dev
+    `))
+    console.log(chalk.bold.rgb(98, 0, 255)(`You are ready to Blazze 🚀. Refer docs at http://blazze/docs.`))
+
+}
+
+
+function getPackageJson(TS,name){
     const deps = TS ? {
         "express": "latest",
         "typescript":"latest",
-        // "blazze":"latest",
+        "blazze":"latest",
         "dotenv": "latest"
     }
         :
     {
         "express": "latest",
         "typescript":"latest",
-        // "blazze":"latest",
+        "blazze":"latest",
         "dotenv": "latest"
     }
-
+    
     const devDeps = TS ? {
         "@types/express": "latest",
         "@types/node": "latest",
     } : {  }
-
-    const packageJson = {
+    
+    return {
         "name": name,
         "version": "1.0.0",
         "private":true,
@@ -79,18 +95,6 @@ async function BlazeInit() {
         "devDependencies": devDeps,
         "type":"module"
     }
-
-    writeFileSync("package.json", JSON.stringify(packageJson, null, 4))
-
-    spinner.succeed();
-    console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)
-    console.log(chalk.whiteBright(`Run commands:
-
-        - npm i
-        - npm run dev
-    `))
-    console.log(chalk.bgBlack(chalk.rgb(247,15,234)(` You are ready to Blazze 🚀. Refer docs at http://blazze/docs. `)))
-
 }
 
 BlazeInit();
