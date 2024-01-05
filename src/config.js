@@ -31,7 +31,7 @@ async function BlazeInit() {
         message: chalk.whiteBright("Where would you like to keep your static conetent like html, png's files ?"),
         default: "public"
     });
-    const spinner = ora(chalk.bgBlack.rgb(247,15,234)(" Configuring your Blazze App ")).start();
+    const spinner = ora(chalk.bold.rgb(98, 0, 255)(" Configuring your Blazze App ")).start();
 
     await new Promise(resolve => { setTimeout(() => { resolve() }, 500) })
 
@@ -48,7 +48,7 @@ async function BlazeInit() {
         TS ?? mkdirSync(resolvePath+`ts/${rootEndPoint}`, { recursive: true })
     }
 
-    // writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
+    writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
 
     spinner.succeed();
     console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)
