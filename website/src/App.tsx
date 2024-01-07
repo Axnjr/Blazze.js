@@ -1,13 +1,100 @@
-import { useState } from 'react'
+"use server"
+import { BackgroundGrid } from './components/grid'
+import { BeamOfLight } from './components/beam'
+import DogeSmile from "/doge.webp"
 import './App.css'
+import ImgCards from "./components/imgCards"
+import Navigation from "./components/nav"
+import Hero from './components/hero'
+import { FeatureCard } from './components/cards'
 
-function App() {
+const features = [
+	{ name: "Routing", description: "Keep the logic separated without any setup. Routes are based on the directory structure." },
+	{ name: "Easy Setup", description: "Hit `npx blazze-init` to start building your projects." },
+	{ name: "TypeScript", description: "No configurations and environment setup, just get started directly" },
+	{ name: "Build Optimization", description: "Makes a single optimized bundle for your app"},
+	{ name: "No Boiler Plate Code", description: "Install init and start nothing else :)" },
+	{ name: "Powered by SWC", description: "Super speed transpilation via the power of Rust." },
+	{ name: "Fast & Robust", description: "Built on top of express, for better developer experience." }
+]
+
+export default function App() {
 	return (
 		<>
-			<div className="container relative grid min-h-screen items-center justify-center py-24 lg:min-h-0 lg:grid-cols-2 lg:py-0 [&>*]:pointer-events-auto"><svg className="animate-beam pointer-events-none absolute left-0 top-0 z-[-1] h-[169%] w-[138%] lg:w-[84%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none"><g filter="url(#filter0_f_1065_8)"><ellipse cx="1924.71" cy="273.501" rx="1924.71" ry="273.501" transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)" fill="white" fillOpacity="0.21" /></g><defs><filter id="filter0_f_1065_8" x="0.860352" y="0.838989" width="3785.16" height="2840.26" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB"><feFlood floodOpacity={0} result="BackgroundImageFix" /><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" /><feGaussianBlur stdDeviation={151} result="effect1_foregroundBlur_1065_8" /></filter></defs></svg><div className="flex w-full flex-col items-center justify-center gap-10 lg:items-start"><a target="_blank" rel="noreferrer" href="https://github.com/typehero/typehero" className="animate-bg-gradient-to-center group rounded-full bg-gradient-to-r from-yellow-600 via-[#3178c6] to-[#3178c6] to-70% bg-[length:420%_420%] bg-right-bottom p-[1px] brightness-90 contrast-150 duration-500 hover:bg-left-top hover:shadow-[0_0_2rem_-0.5rem_#3178c6] dark:from-yellow-500 dark:via-white dark:to-[#3178c6] dark:brightness-125 dark:contrast-100 dark:hover:shadow-[0_0_2rem_-0.5rem_#fff8]"><div className="rounded-full bg-white/80 px-3 py-1 dark:bg-black/80"><span className="animate-bg-gradient-to-center relative flex select-none items-center bg-gradient-to-r to-70% bg-[length:420%_420%] bg-clip-text bg-right-bottom text-transparent duration-500 group-hover:bg-left-top dark:from-yellow-500 dark:via-white dark:to-[#3178c6]"><svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="animate-oldstar absolute  -left-1 top-0.5 mr-2 h-5 w-5 translate-x-0.5 stroke-[#3178c6] stroke-2 duration-500 group-hover:rotate-180 group-hover:scale-110 group-hover:stroke-yellow-600 dark:duration-500  "><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" /></svg><svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="animate-newstar mr-2 h-4 w-4 stroke-[#3178c6] stroke-2 duration-500 group-hover:rotate-180 group-hover:scale-110 group-hover:fill-[#3178c6] dark:stroke-white dark:duration-500 dark:group-hover:fill-white"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" /></svg> Star us on GitHub</span></div></a><div className="relative flex w-full items-center justify-center gap-4 lg:justify-start"><div className="absolute left-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-x-[15%] -translate-y-[50%] rounded-full bg-slate-400/10 blur-3xl dark:block" /><div className="absolute right-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-y-[40%] rounded-full bg-[#3178c6]/20 blur-3xl dark:block" /><svg className="h-28 w-28 sm:h-44 sm:w-44" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 633 633" fill="none"><g className="dark:hidden"><path d="M0 74.9605C0 33.561 33.561 0 74.9605 0H558.039C599.439 0 633 33.561 633 74.9605V558.039C633 599.439 599.439 633 558.039 633H74.9605C33.561 633 0 599.439 0 558.039V74.9605Z" fill="#3178C6" /><path fillRule="evenodd" clipRule="evenodd" d="M261.441 348.724H333.158V299.842H133.263V348.724H204.629V566.368H261.441V348.724Z" fill="white" /><path d="M366.474 566.368V299.842H423.962V410.298H508.741V299.842H566.368V566.368H508.741V455.523H423.962V566.368H366.474Z" fill="white" /></g><g className="animate-logo-light hidden dark:block"><path d="M0 74.9605C0 33.561 33.561 0 74.9605 0H558.039C599.439 0 633 33.561 633 74.9605V558.039C633 599.439 599.439 633 558.039 633H74.9605C33.561 633 0 599.439 0 558.039V74.9605Z" fill="#3178C6" /><path fillRule="evenodd" clipRule="evenodd" d="M261.441 348.724H333.158V299.842H133.263V348.724H204.629V566.368H261.441V348.724Z" fill="white" /><path d="M366.474 566.368V299.842H423.962V410.298H508.741V299.842H566.368V566.368H508.741V455.523H423.962V566.368H366.474Z" fill="white" /></g><g className="animate-3d-logo hidden dark:block" filter="url(#filter0_ii_1050_32)"><path d="M0 74.9605C0 33.561 33.561 0 74.9605 0H558.039C599.439 0 633 33.561 633 74.9605V558.039C633 599.439 599.439 633 558.039 633H74.9605C33.561 633 0 599.439 0 558.039V74.9605Z" fill="#3178C6" /><path fillRule="evenodd" clipRule="evenodd" d="M261.441 348.724H333.158V299.842H133.263V348.724H204.629V566.368H261.441V348.724Z" fill="white" /><path d="M366.474 566.368V299.842H423.962V410.298H508.741V299.842H566.368V566.368H508.741V455.523H423.962V566.368H366.474Z" fill="white" /></g><defs><filter id="filter0_ii_1050_32" x={-49} y={-49} width={732} height={732} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB"><feFlood floodOpacity={0} result="BackgroundImageFix" /><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" /><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /><feOffset dx={-49} dy={-49} /><feGaussianBlur stdDeviation="74.5" /><feComposite in2="hardAlpha" operator="arithmetic" k2={-1} k3={1} /><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" /><feBlend mode="normal" in2="shape" result="effect1_innerShadow_1050_32" /><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /><feOffset dx={50} dy={50} /><feGaussianBlur stdDeviation="57.5" /><feComposite in2="hardAlpha" operator="arithmetic" k2={-1} k3={1} /><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.12 0" /><feBlend mode="normal" in2="effect1_innerShadow_1050_32" result="effect2_innerShadow_1050_32" /></filter></defs></svg><h1 className="animate-bg-gradient-to-center-title dark:to-69% select-none bg-gradient-to-br from-[#3178c6] from-[69%] to-black/0 bg-clip-text bg-right-bottom text-6xl font-extrabold text-transparent dark:from-white dark:from-30% dark:via-[#3178c6] dark:to-[#3178c6] dark:bg-[length:300%_300%] sm:text-8xl sm:leading-[5.5rem]">type<br />hero</h1></div><p className="max-w-[55ch] bg-transparent text-center font-medium leading-8 text-black/60 dark:text-white/50 sm:px-8 lg:px-0 lg:text-left"><span data-br=":ra:" data-brr={1} style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', textWrap: 'balance' }}>Connect, collaborate, and grow with a community of TypeScript developers. Elevate your skills through interactive coding challenges, discussions, and knowledge sharing</span></p><div className="flex flex-col-reverse gap-3 md:flex-row"><a className="items-center justify-center text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-not-allowed ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 hero-join-button-dark group relative mx-auto hidden w-fit overflow-hidden rounded-xl p-[1px] font-bold transition-all duration-300 dark:block dark:hover:shadow-[0_0_2rem_-0.5rem_#fff8] md:mr-0 lg:mr-auto" href="/explore"><span className="inline-flex h-full w-fit items-center gap-2 rounded-xl px-4 py-2 transition-all duration-300 dark:bg-neutral-900 dark:text-white group-hover:dark:bg-black"><svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><circle cx={12} cy={12} r={10} /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></svg>Start exploring</span></a><div className="flex gap-3"><a target="_blank" rel="noreferrer" className="justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-not-allowed ring-offset-background border-input hover:bg-accent hover:text-accent-foreground h-10 flex items-center gap-2 rounded-xl border-2 px-4 py-2 dark:text-white gap-1 md:inline-flex" href="https://github.com/typehero/typehero"><svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>GitHub</a><a target="_blank" rel="noreferrer" className="justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-not-allowed ring-offset-background border-input hover:bg-accent hover:text-accent-foreground h-10 flex items-center gap-2 rounded-xl border-2 px-4 py-2 dark:text-white gap-1 md:inline-flex" href="https://twitter.com/typeheroapp"><svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>Twitter</a></div></div></div><div className="relative hidden h-[800px] overflow-visible rounded-full lg:block"><div className="absolute -inset-40 top-1/2 -z-30 -translate-y-1/2 translate-x-[-30px] overflow-hidden rounded-full"><div className="relative h-full w-full"><div className="moving-grid-background absolute h-[200%] w-full" style={{ opacity: 1 }} /><div className="shadow-background absolute h-full w-full rounded-full shadow-[inset_0_0_5rem_3rem]" /></div></div><div className="group" style={{ opacity: 1, transform: 'translateX(180px) translateY(140px) translateZ(0px)' }}><div className="absolute group/card flex w-[320px] flex-col gap-3 rounded-2xl border border-neutral-300 bg-zinc-100 p-7 drop-shadow-[0_0_15px_rgba(49,49,49,0.2)] duration-300 hover:-skew-x-3 hover:scale-105 hover:shadow-[2rem_2rem_2rem_-1rem_#0004,inset_1rem_1rem_4rem_-1rem_#fff1] dark:border-zinc-800 dark:bg-zinc-900 dark:drop-shadow-[0_0_15px_rgba(49,49,49,0.35)] dark:hover:border-zinc-600"><p className="translate-x-1 text-lg font-medium">Implement a union type of number and string</p><div className="flex gap-3"><div className="inline-flex w-fit translate-x-1 items-center rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold text-white duration-300 group-hover/card:-translate-x-0 group-hover/card:-translate-y-1 group-hover/card:shadow-[0.5rem_0.5rem_0.25rem_-0.25rem_#0004] dark:text-black dark:bg-green-300 bg-green-600">EASY</div><div className="flex w-fit items-center justify-center rounded-full bg-transparent bg-zinc-600 px-2.5 py-1 pl-1.5 pr-2 text-xs font-bold text-neutral-50 duration-300 group-hover/card:-translate-x-1 group-hover/card:-translate-y-1 group-hover/card:shadow-[0.5rem_0.5rem_0.25rem_-0.25rem_#0004] dark:bg-zinc-700 dark:text-white">@bigmang</div></div><div className="translate-x-1 text-xs">Implement a union type of number and string</div><div className="mt-4 h-56 flex-grow rounded-xl bg-zinc-300/70 p-4 duration-300 group-hover/card:-translate-x-1 group-hover/card:-translate-y-3 group-hover/card:shadow-[1rem_1rem_2.5rem_-1rem_#0008] dark:bg-zinc-800/70"><svg fill="none" height={193} viewBox="0 0 256 193" width={256} xmlns="http://www.w3.org/2000/svg"><rect width="232px" rx="4.5" height={10} className="fill-[#ABABB2] dark:fill-neutral-700" y={0} /><rect width="119px" rx="4.5" height={10} className="fill-[#A48088] dark:fill-[#544048]" y={19} /><rect width="130px" rx="4.5" height={10} className="fill-[#A48088] dark:fill-[#544048]" y={38} /><rect width="190px" rx="4.5" height={10} className="fill-[#809F94] dark:fill-[#404F54]" y={57} /><rect width="139px" rx="4.5" height={10} className="fill-[#ABABB2] dark:fill-neutral-700" y={90} /><rect width="184px" rx="4.5" height={10} className="fill-[#ABABB2] dark:fill-neutral-700" y={109} /><rect width="169px" rx="4.5" height={10} className="fill-[#A48088] dark:fill-[#544048]" y={128} /><rect width="170px" rx="4.5" height={10} className="fill-[#A48088] dark:fill-[#544048]" y={147} /><rect width="139px" rx="4.5" height={10} className="fill-[#809F94] dark:fill-[#404F54]" y={166} /><rect width="227px" rx="4.5" height={10} className="fill-[#809F94] dark:fill-[#404F54]" y={184} /></svg></div></div></div><div className="group" style={{ opacity: 1, transform: 'translateX(80px) translateY(260px) translateZ(0px)' }}><div className="absolute group/card flex w-[320px] flex-col gap-3 rounded-2xl border border-neutral-300 bg-zinc-100 p-7 drop-shadow-[0_0_15px_rgba(49,49,49,0.2)] duration-300 hover:-skew-x-3 hover:scale-105 hover:shadow-[2rem_2rem_2rem_-1rem_#0004,inset_1rem_1rem_4rem_-1rem_#fff1] dark:border-zinc-800 dark:bg-zinc-900 dark:drop-shadow-[0_0_15px_rgba(49,49,49,0.35)] dark:hover:border-zinc-600"><p className="translate-x-1 text-lg font-medium">String to Number</p><div className="flex gap-3"><div className="inline-flex w-fit translate-x-1 items-center rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold text-white duration-300 group-hover/card:-translate-x-0 group-hover/card:-translate-y-1 group-hover/card:shadow-[0.5rem_0.5rem_0.25rem_-0.25rem_#0004] dark:text-black dark:bg-red-300 bg-red-600">HARD</div><div className="flex w-fit items-center justify-center rounded-full bg-transparent bg-zinc-600 px-2.5 py-1 pl-1.5 pr-2 text-xs font-bold text-neutral-50 duration-300 group-hover/card:-translate-x-1 group-hover/card:-translate-y-1 group-hover/card:shadow-[0.5rem_0.5rem_0.25rem_-0.25rem_#0004] dark:bg-zinc-700 dark:text-white">@matt</div></div><div className="translate-x-1 text-xs">Convert a string literal to a number</div><div className="mt-4 h-56 flex-grow rounded-xl bg-zinc-300/70 p-4 duration-300 group-hover/card:-translate-x-1 group-hover/card:-translate-y-3 group-hover/card:shadow-[1rem_1rem_2.5rem_-1rem_#0008] dark:bg-zinc-800/70"><svg fill="none" height={193} viewBox="0 0 256 193" width={256} xmlns="http://www.w3.org/2000/svg"><rect width="181px" rx="4.5" height={10} className="fill-[#ABABB2] dark:fill-neutral-700" y={0} /><rect width="223px" rx="4.5" height={10} className="fill-[#A48088] dark:fill-[#544048]" y={19} /><rect width="150px" rx="4.5" height={10} className="fill-[#A48088] dark:fill-[#544048]" y={38} /><rect width="150px" rx="4.5" height={10} className="fill-[#809F94] dark:fill-[#404F54]" y={57} /><rect width="214px" rx="4.5" height={10} className="fill-[#ABABB2] dark:fill-neutral-700" y={90} /><rect width="217px" rx="4.5" height={10} className="fill-[#ABABB2] dark:fill-neutral-700" y={109} /><rect width="226px" rx="4.5" height={10} className="fill-[#A48088] dark:fill-[#544048]" y={128} /><rect width="126px" rx="4.5" height={10} className="fill-[#A48088] dark:fill-[#544048]" y={147} /><rect width="182px" rx="4.5" height={10} className="fill-[#809F94] dark:fill-[#404F54]" y={166} /><rect width="235px" rx="4.5" height={10} className="fill-[#809F94] dark:fill-[#404F54]" y={184} /></svg></div></div></div></div></div>
-			<h1 className='text-8xl font-black'>Blazze.js</h1>
+			<main className="w-full m-auto h-fit p-8 overflow-hidden">
+				<BeamOfLight />
+				<Navigation />
+				<div className="absolute inset-0 overflow-hidden opacity-50 -z-30">
+					<BackgroundGrid />
+				</div>
+				<div className="grid m-auto grid-rows-1 lg:grid-cols-2 w-full h-full lg:h-screen items-center justify-center mt-24 lg:mt-8 px-8">
+					<Hero />
+					<ImgCards />
+				</div>
+				<section className='relative w-full h-full mt-20'>
+					<div className="mx-auto  mb-[64px] grid max-w-[1400px] items-center justify-center px-4 sm:px-24 md:px-4 lg:px-24">
+						<div className="flex flex-col  items-center justify-center gap-16">
+							<div className="mt-1 flex flex-col gap-3 px-4 text-center sm:px-0">
+								<a className="mx-auto hidden rounded-full bg-gradient-to-r from-[#ffffff] to-blue-500 p-[1px] brightness-90 contrast-150 focus:outline-none focus:ring-blue-600 focus-visible:ring-2 dark:brightness-125 dark:contrast-100 sm:block" href="#features">
+									<div className="group relative overflow-hidden rounded-full bg-white/80 px-3 py-1 duration-300 hover:pr-9 dark:bg-black/80">
+										<span className="select-none bg-gradient-to-r from-[#31bdc6] to-[#3178c6] bg-clip-text text-transparent">
+											<svg
+												className="mr-1 inline-block h-4 w-4 fill-[#31bdc6]"
+												viewBox="4 4 48 48"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path d="m19.2 36.4-4.75-10.45L4 21.2l10.45-4.75L19.2 6l4.75 10.45L34.4 21.2l-10.45 4.75ZM36.4 42l-2.35-5.25-5.25-2.35 5.25-2.4 2.35-5.2 2.4 5.2 5.2 2.4-5.2 2.35Z" />
+											</svg>
+											Many features, Wow
+											<img
+												className="absolute -bottom-1 right-1 translate-y-7 duration-300 group-hover:translate-y-0"
+												alt="doge smile"
+												height="28"
+												width="28"
+												src={DogeSmile}
+											/>
+										</span>
+									</div>
+								</a>
+
+								<h1 className='text-5xl m-4 tracking-tighter font-black'>
+									What's in Blazze ?
+								</h1>
+								<p className='text-neutral-400/90 text-md'>All you need to write API's with ease & peace 😌</p>
+
+								<br />
+
+								<div className='relative z-10 grid w-full gap-4 md:grid-cols-2 lg:gap-8'>
+								{
+									features.map((f, id) => {
+										return <FeatureCard key={id} className='w-[100%] h-fit hover:shadow-2xl shadow-blue-500'>
+											<div className='w-full h-44 p-8 rounded-xl bg-neutral-500/10 hover:bg-neutral-500/20 flex 
+											flex-col items-start justify-center text-left gap-2 '>
+												<h1 className=' tracking-tighter font-black text-3xl m-4'>{f.name}</h1>
+												<p className='px-4 text-sm'>{f.description}</p>
+											</div>
+										</FeatureCard>
+									})
+								}
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
 		</>
 	)
 }
 
-export default App
+/**
+ * {
+									features.map((f,id) => {
+										return <FeatureCard key={id}>
+										<div className='w-full h-24 rounded-xl bg-neutral-500/10 hover:bg-neutral-500/20 flex items-center justify-center'>
+											<h1 className='heading text-3xl'>{f}</h1>
+										</div>
+									</FeatureCard>
+									})
+								}
+ */
