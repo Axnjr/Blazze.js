@@ -4,9 +4,8 @@ import { readFileSync, watch } from "fs";
 import { chconf, errorRed, infoGreyDev, warning, safe, danger } from "./chconf.js"
 import { revalidateCache } from "./cache.js";
 
-const app = express();
-
 const config = await chconf() 
+const app = express();
 
 class Blaze {
 
