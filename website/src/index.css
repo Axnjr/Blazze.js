@@ -2,28 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "tw";
+  font-weight: 900;
+  src: url("./assets//Inter-SemiBold.woff2");
+}
+
+@font-face {
+  font-family: "inter";
+  font-weight: 900;
+  src: url("./assets//c9a5bc6a7c948fb0-s.p.woff2");
+}
+
+.heading{
+  font-family: "inter",sans-serif;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
+  font-family: "tw", sans-serif;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgb(255, 255, 255);
   background-color: #000000;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* ::-webkit-scrollbar{display: none;} */
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
+  overflow: hidden;
 }
 
 body {
@@ -34,10 +46,6 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
 button {
   border-radius: 8px;
@@ -50,12 +58,24 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
+
+.hero-join-button-dark {
+  background: linear-gradient(var(--gradient-angle), hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .1), #fff, hsla(0, 0%, 100%, .3)) !important;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+.hero-join-button,
+.hero-join-button-dark {
+  animation: borderGrad 5s linear infinite reverse;
+}
+
+@keyframes borderGrad {
+  0% {
+    --gradient-angle: 360deg;
+  }
+
+  100% {
+    --gradient-angle: 0deg;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -63,9 +83,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
