@@ -3,7 +3,7 @@ import chalk from "chalk";
 import { chconf, errorRed, whiteMessage } from "./src/chconf.js"
 import nodemon from "nodemon";
 import swc from "@swc/core"
-import { existsSync, writeFileSync, mkdirSync, appendFileSync } from "fs";
+import { existsSync, writeFileSync, mkdirSync, appendFileSync, readdirSync } from "fs";
 import { revalidateCache } from "./src/cache.js";
 
 const config = await chconf()
@@ -25,24 +25,34 @@ const scriptToRun =
     config.resolvePath+"/src/dev.js"
 ;
 
+readdirSync(config.rootEndPoint).forEach(dir => {
+    readdirSync(config.rootEndPoint+"/"+dir).forEach(file => {
+        let rtf = "/"+dir+"/"+file
+        transpileTs(rtf, false)
+    })
+})
+
 await nodemon({
     script: scriptToRun,
-    ext: config.TS ? "ts" : "js",  // File extensions to watch for changes
-    watch: [config.rootEndPoint],  // Watch only the specified file for changes
+    ext: "js,ts", // config.TS ? "ts" : "js",  // File extensions to watch for changes
+    watch: [config.rootEndPoint,"cache"],  // Watch only the specified file for changes
 })
 
 .on('restart', async (file) => {
 
-    let t = routeToTsFile[0].replaceAll("\\","/").split(config.rootEndPoint)
+    // nodemon restarts the server whenever:
+    //  @ There is change in the files in the rootEndPoint dir
+    //  @ There is change in the files in the cache dir
+    // -------------------------------------------------------------------------------------- //
+    // if changed file was in the cache then "t" would have length 1, as there will be no split
+    // we get a array of two 1st val is c/user../rootEndPonit and 2nd val is the dir/file that was changed
+    let t = file[0].replaceAll("\\","/").split(config.rootEndPoint)
 
-    let temp = t[1].replaceAll("/","")
+    // let temp = t[1].replaceAll("/","")
+    // appendFileSync(config.resolvePath+"src/cache.Hint.js", `let ${temp} = false `) // false means don't cache 
 
-    appendFileSync(config.resolvePath+"src/cache.Hint.json", `
-        ${temp}: false 
-    `) // false means don't cache 
-
-    if(config.TS)
-        transpileTs(t)
+    if(config.TS && t.length > 1)
+        transpileTs(t[1], true)
 });
 
 console.log(chalk.gray(`
@@ -58,26 +68,26 @@ function greenArrow(){
     return chalk.greenBright("➜ ")
 }
 
-async function transpileTs(routeToTsFile) {
+async function transpileTs(routeToTsFile,logMesBool) {
     let 
         // t = routeToTsFile[0].replaceAll("\\","/").split(config.rootEndPoint),
         start = performance.now(),
         jsFromTs
     ;
 
-    whiteMessage(chalk.cyanBright("o"),"Blaze Transpiling TypeScript /", routeToTsFile)
+    logMesBool ?? whiteMessage(chalk.cyanBright("o"),"Blaze Transpiling TypeScript /", routeToTsFile)
 
     try {
 
-        jsFromTs = await swc.transformFile(config.rootEndPoint + routeToTsFile[1],{
+        jsFromTs = await swc.transformFile(config.rootEndPoint + routeToTsFile,{
             swcrc:true
         })
 
-        writeFileSync(`blazze/${routeToTsFile[1].replaceAll("/",".").replace("ts","js")}`, jsFromTs.code)
+        writeFileSync(`blazze/${routeToTsFile.replaceAll("/",".").replace("ts","js")}`, jsFromTs.code)
         // writeFileSync(config.rootEndPoint+t[1].replace("ts","js"), jsFromTs.code)
 
         let end = performance.now()
-        whiteMessage(chalk.greenBright("✓"),`Ready in ${chalk.greenBright((end - start).toFixed(2))} ms`)
+        logMesBool ?? whiteMessage(chalk.greenBright("✓"),`Ready in ${chalk.greenBright((end - start).toFixed(2))} ms`)
     } 
 
     catch (error) {
