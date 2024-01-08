@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import chalk from 'chalk';
 
-export default async function (req:Request,res:Response,blazze:any){
+export default async function (req:Request,res:Response){
 
     let t = req.query
     let b = req.params
@@ -16,8 +16,5 @@ export default async function (req:Request,res:Response,blazze:any){
         Params:b
     }
 
-    blazze("json",body,"subs@new@_ids/GET")
-
     res.json(body)
-
 }
