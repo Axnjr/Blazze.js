@@ -1,22 +1,11 @@
 "use server"
 import { BackgroundGrid } from './components/grid'
 import { BeamOfLight } from './components/beam'
-import DogeSmile from "/doge.webp"
 import './App.css'
 import ImgCards from "./components/imgCards"
 import Navigation from "./components/nav"
 import Hero from './components/hero'
-import { FeatureCard } from './components/cards'
-
-const features = [
-	{ name: "Routing", description: "Keep the logic separated without any setup. Routes are based on the directory structure." },
-	{ name: "Easy Setup", description: "Hit `npx blazze-init` to start building your projects." },
-	{ name: "TypeScript", description: "No configurations and environment setup, just get started directly" },
-	{ name: "Build Optimization", description: "Makes a single optimized bundle for your app"},
-	{ name: "No Boiler Plate Code", description: "Install init and start nothing else :)" },
-	{ name: "Powered by SWC", description: "Super speed transpilation via the power of Rust." },
-	{ name: "Fast & Robust", description: "Built on top of express, for better developer experience." }
-]
+import Features from './components/features'
 
 export default function App() {
 	return (
@@ -31,70 +20,19 @@ export default function App() {
 					<Hero />
 					<ImgCards />
 				</div>
-				<section className='relative w-full h-full mt-20'>
-					<div className="mx-auto  mb-[64px] grid max-w-[1400px] items-center justify-center px-4 sm:px-24 md:px-4 lg:px-24">
-						<div className="flex flex-col  items-center justify-center gap-16">
-							<div className="mt-1 flex flex-col gap-3 px-4 text-center sm:px-0">
-								<a className="mx-auto hidden rounded-full bg-gradient-to-r from-[#ffffff] to-blue-500 p-[1px] brightness-90 contrast-150 focus:outline-none focus:ring-blue-600 focus-visible:ring-2 dark:brightness-125 dark:contrast-100 sm:block" href="#features">
-									<div className="group relative overflow-hidden rounded-full bg-white/80 px-3 py-1 duration-300 hover:pr-9 dark:bg-black/80">
-										<span className="select-none bg-gradient-to-r from-[#31bdc6] to-[#3178c6] bg-clip-text text-transparent">
-											<svg
-												className="mr-1 inline-block h-4 w-4 fill-[#31bdc6]"
-												viewBox="4 4 48 48"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path d="m19.2 36.4-4.75-10.45L4 21.2l10.45-4.75L19.2 6l4.75 10.45L34.4 21.2l-10.45 4.75ZM36.4 42l-2.35-5.25-5.25-2.35 5.25-2.4 2.35-5.2 2.4 5.2 5.2 2.4-5.2 2.35Z" />
-											</svg>
-											Many features, Wow
-											<img
-												className="absolute -bottom-1 right-1 translate-y-7 duration-300 group-hover:translate-y-0"
-												alt="doge smile"
-												height="28"
-												width="28"
-												src={DogeSmile}
-											/>
-										</span>
-									</div>
-								</a>
-
-								<h1 className='text-5xl m-4 tracking-tighter font-black'>
-									What's in Blazze ?
-								</h1>
-								<p className='text-neutral-400/90 text-md'>All you need to write API's with ease & peace 😌</p>
-
-								<br />
-
-								<div className='relative z-10 grid w-full gap-4 md:grid-cols-2 lg:gap-8'>
-								{
-									features.map((f, id) => {
-										return <FeatureCard key={id} className='w-[100%] h-fit hover:shadow-2xl shadow-blue-500'>
-											<div className='w-full h-44 p-8 rounded-xl bg-neutral-500/10 hover:bg-neutral-500/20 flex 
-											flex-col items-start justify-center text-left gap-2 '>
-												<h1 className=' tracking-tighter font-black text-3xl m-4'>{f.name}</h1>
-												<p className='px-4 text-sm'>{f.description}</p>
-											</div>
-										</FeatureCard>
-									})
-								}
-								</div>
-
-							</div>
-						</div>
+				<Features />
+				<div style={{contain:"layout"}} className='w-full rounded-full h-full relative mt-32 py-24 text-center m-auto overflow-hidden'>
+					<h1 className='text-5xl tracking-tighter font-black'>
+						Start building with Blazze.js
+					</h1>
+					<div className='para max-w-xl m-auto my-12 font-medium text-md text-gray-400'>
+						If you are familar with next.js its almost the same, the only diffrence is that instead of a route.ts/js file
+						you have seprate files for each method ex: GET.ts for get requests and so on ..
 					</div>
-				</section>
+					<button className='bg-white text-black py-1 px-2'>Quick Docs</button>
+					<svg className='m-auto w- absolute left-1/2 bottom-1/2 -translate-x-1/2 -translate-y-1/' fill="none" height={640} viewBox="0 0 1744 640" width={1744} xmlns="http://www.w3.org/2000/svg"><g filter="url(#filter0_f_521_2815)" opacity="0.25"><ellipse cx={872} cy={330} fill="#D6DBDC" rx={792} ry={230} /></g><g filter="url(#filter1_f_521_2815)" opacity="0.2"><ellipse cx={464} cy="411.5" fill="#6ADDF4" rx={256} ry="129.5" /></g><g filter="url(#filter2_f_521_2815)" opacity="0.2"><ellipse cx={592} cy="364.5" fill="#6AB2F4" rx={128} ry="176.5" /></g><g filter="url(#filter3_f_521_2815)" opacity="0.2"><ellipse cx={1162} cy="396.5" fill="#6ADDF4" rx={256} ry="129.5" /></g><g filter="url(#filter4_f_521_2815)" opacity="0.2"><ellipse cx={1162} cy="256.5" fill="#6AB2F4" rx={128} ry="176.5" /></g><defs><filter colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height={620} id="filter0_f_521_2815" width={1744} x={0} y={20}><feFlood floodOpacity={0} result="BackgroundImageFix" /><feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape" /><feGaussianBlur result="effect1_foregroundBlur_521_2815" stdDeviation={40} /></filter><filter colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height={419} id="filter1_f_521_2815" width={672} x={128} y={202}><feFlood floodOpacity={0} result="BackgroundImageFix" /><feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape" /><feGaussianBlur result="effect1_foregroundBlur_521_2815" stdDeviation={40} /></filter><filter colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height={513} id="filter2_f_521_2815" width={416} x={384} y={108}><feFlood floodOpacity={0} result="BackgroundImageFix" /><feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape" /><feGaussianBlur result="effect1_foregroundBlur_521_2815" stdDeviation={40} /></filter><filter colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height={419} id="filter3_f_521_2815" width={672} x={826} y={187}><feFlood floodOpacity={0} result="BackgroundImageFix" /><feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape" /><feGaussianBlur result="effect1_foregroundBlur_521_2815" stdDeviation={40} /></filter><filter colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height={513} id="filter4_f_521_2815" width={416} x={954} y={0}><feFlood floodOpacity={0} result="BackgroundImageFix" /><feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape" /><feGaussianBlur result="effect1_foregroundBlur_521_2815" stdDeviation={40} /></filter></defs></svg>
+				</div>
 			</main>
 		</>
 	)
 }
-
-/**
- * {
-									features.map((f,id) => {
-										return <FeatureCard key={id}>
-										<div className='w-full h-24 rounded-xl bg-neutral-500/10 hover:bg-neutral-500/20 flex items-center justify-center'>
-											<h1 className='heading text-3xl'>{f}</h1>
-										</div>
-									</FeatureCard>
-									})
-								}
- */
