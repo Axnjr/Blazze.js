@@ -3,27 +3,26 @@ import express from "express";
 import { existsSync, mkdirSync, readFileSync, watch, writeFileSync } from "fs";
 import { chconf, errorRed, infoGreyDev, warning, safe, danger } from "./chconf.js"
 import { revalidateCache } from "./cache.js";
+import nodemon from "nodemon";
 
 const config = await chconf()
 const app = express();
 
 // Extend the response object's prototype
 express.response.logResponse = function (reqQuery,reqParams,body,route,method) {
-
-    errorRed("CACHING ....")
-
-    if(!existsSync("blazze/cache")){
-        mkdirSync("blazze/cache", {recursive:true})
+    errorRed("CACHING REQUEST ....")
+    if(!existsSync("cache")){
+        mkdirSync("cache", {recursive:true})
     }
 
     let temp = route+"."+method
 
-    writeFileSync(config.resolvePath+"src/cache.Hint.json", JSON.stringify({
-        temp:true
-    }))
+    // writeFileSync(config.resolvePath+"src/cache.Hint.json", JSON.stringify({
+    //     temp:true
+    // }))
 
-    writeFileSync(`blazze/cache/.${route}.${method}.js`, `
-        let cache = ${JSON.stringify({
+    writeFileSync(`cache/${temp}.js`, `
+        export const cache = ${JSON.stringify({
             Key: {
                 query: reqQuery,
                 params: reqParams
@@ -117,8 +116,25 @@ class Blaze {
         // subs/join/:ids 
         app[method](`/${config.rootEndPoint}/${route}`, async (req, res) => {
 
+            let cachedReq;
 
+            try {
+                cachedReq = await import("file:///"+process.cwd()+"/cache/"+originalRoute+"."+method+".js")
+                const { Key, Value } = cachedReq.cache
 
+                if(JSON.stringify(Key.query) == JSON.stringify(req.query)){
+                    console.log("Cache hit !!")
+                    res.send(Value)
+
+                    return;
+                }
+            } 
+            catch (error) {errorRed(error)}
+
+            // a place to store cached requests
+            // if req was in cache then return cached value
+            // if req was not in cache then move it after executing
+            console.log("Cache miss !!")
             let getCallback = await this._getMethodCallback(originalRoute, methodFile);
             try {
                 // dynamic route params can be accessed from req.params.paramName ex : req.params.users
