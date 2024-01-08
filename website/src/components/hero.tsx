@@ -14,8 +14,8 @@ export default function Hero() {
                 </div>
             </a>
             <div className="relative flex w-full items-center justify-center gap-2 lg:justify-start">
-                <h1 className="heading text-8xl lg:text-7xl text-center lg:text-left font-black tracking-tight
-                capitalize bg-gradient-to-br from-white to-blue-500 bg-clip-text text-transparent">
+                <h1 className="text-8xl lg:text-7xl text-center lg:text-left font-black tracking-tighter capitalize
+                 hover:bg-gradient-to-br from-white to-blue-200 hover:bg-clip-text hover:text-transparent">
                     The express<br />
                     framework<br />
                     for the web.
