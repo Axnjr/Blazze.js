@@ -3,7 +3,7 @@ import chalk from "chalk";
 import { chconf, errorRed, whiteMessage } from "./src/chconf.js"
 import nodemon from "nodemon";
 import swc from "@swc/core"
-import { existsSync, writeFileSync, mkdirSync } from "fs";
+import { existsSync, writeFileSync, mkdirSync, appendFileSync } from "fs";
 import { revalidateCache } from "./src/cache.js";
 
 const config = await chconf()
@@ -32,8 +32,17 @@ await nodemon({
 })
 
 .on('restart', async (file) => {
+
+    let t = routeToTsFile[0].replaceAll("\\","/").split(config.rootEndPoint)
+
+    let temp = t[1].replaceAll("/","")
+
+    appendFileSync(config.resolvePath+"src/cache.Hint.json", `
+        ${temp}: false 
+    `) // false means don't cache 
+
     if(config.TS)
-        transpileTs(file)
+        transpileTs(t)
 });
 
 console.log(chalk.gray(`
@@ -51,7 +60,7 @@ function greenArrow(){
 
 async function transpileTs(routeToTsFile) {
     let 
-        t = routeToTsFile[0].replaceAll("\\","/").split(config.rootEndPoint),
+        // t = routeToTsFile[0].replaceAll("\\","/").split(config.rootEndPoint),
         start = performance.now(),
         jsFromTs
     ;
@@ -60,11 +69,11 @@ async function transpileTs(routeToTsFile) {
 
     try {
 
-        jsFromTs = await swc.transformFile(config.rootEndPoint + t[1],{
+        jsFromTs = await swc.transformFile(config.rootEndPoint + routeToTsFile[1],{
             swcrc:true
         })
 
-        writeFileSync(`blazze/${t[1].replaceAll("/",".").replace("ts","js")}`, jsFromTs.code)
+        writeFileSync(`blazze/${routeToTsFile[1].replaceAll("/",".").replace("ts","js")}`, jsFromTs.code)
         // writeFileSync(config.rootEndPoint+t[1].replace("ts","js"), jsFromTs.code)
 
         let end = performance.now()

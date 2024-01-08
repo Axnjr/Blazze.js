@@ -123,11 +123,11 @@ function _ts_generator(thisArg, body) {
     }
 }
 import chalk from "chalk";
-export default function(req, res) {
+export default function(req, res, blazze) {
     return _ref.apply(this, arguments);
 }
 function _ref() {
-    _ref = _async_to_generator(function(req, res) {
+    _ref = _async_to_generator(function(req, res, blazze) {
         var t, b;
         return _ts_generator(this, function(_state) {
             t = req.query;
@@ -137,8 +137,8 @@ function _ref() {
                 Mes: "Dynamic nested route test with swc.",
                 Status: "ok",
                 Code: 200,
-                T: t,
-                B: b
+                Query: t,
+                Params: b
             });
             return [
                 2

@@ -1,11 +1,39 @@
 #!/usr/bin/env node
 import express from "express";
-import { readFileSync, watch } from "fs";
+import { existsSync, mkdirSync, readFileSync, watch, writeFileSync } from "fs";
 import { chconf, errorRed, infoGreyDev, warning, safe, danger } from "./chconf.js"
 import { revalidateCache } from "./cache.js";
 
-const config = await chconf() 
+const config = await chconf()
 const app = express();
+
+// Extend the response object's prototype
+express.response.logResponse = function (reqQuery,reqParams,body,route,method) {
+
+    errorRed("CACHING ....")
+
+    if(!existsSync("blazze/cache")){
+        mkdirSync("blazze/cache", {recursive:true})
+    }
+
+    let temp = route+"."+method
+
+    writeFileSync(config.resolvePath+"src/cache.Hint.json", JSON.stringify({
+        temp:true
+    }))
+
+    writeFileSync(`blazze/cache/.${route}.${method}.js`, `
+        let cache = ${JSON.stringify({
+            Key: {
+                query: reqQuery,
+                params: reqParams
+            },
+            Value:body
+        }, null , 4)}
+    `)
+
+    return;
+};
 
 class Blaze {
 
@@ -22,12 +50,13 @@ class Blaze {
 
     _listenToChanges() {
         watch(config.rootEndPoint, { recursive: true, persistent: false })
-        .on("change", (event) => {
-            if(event == "rename"){
-                infoGreyDev("[A new route has been created or deleted revalidating cache !!]")
-                revalidateCache("Revalidating ...")
-            }
-        });
+            .on("change", (event) => {
+                console.log('Something changed !!')
+                if (event == "rename") {
+                    infoGreyDev("[A new route has been created or deleted revalidating cache !!]")
+                    revalidateCache("Revalidating ...")
+                }
+            });
     }
 
     _startBlazeServer() {
@@ -54,6 +83,9 @@ class Blaze {
 
         app.use(express.static(config.staticRoot ?? "public"));
         app.listen(config.port);
+
+       
+
         return;
     }
 
@@ -67,16 +99,26 @@ class Blaze {
 
     _dynamicExpressExecuter(method, route) {
         let methodFile = method.toUpperCase(), originalRoute = route;
-        // If Route is /subs/join/:id then it is represented as subs@join@_ids
-        if (route.includes("@")) {
-            route = route.replaceAll("@", "/");
-        }
-        // sub/join/_ids
-        if (route.includes("_")) {
-            route = route.replaceAll("_", ":");
-        }
+
+        // If Route is /subs/join/:id then it is represented as subs@join@_ids 
+        // // sub/join/_ids
+     
+        route = route.replaceAll("@","/").replaceAll("_",":")
+
+        app.use(`/${config.rootEndPoint}/${route}`, async (req, res, next) => {
+            let originalResSend = res.send
+            res.send = function(body){
+                originalResSend.apply(res, arguments)
+                res.logResponse(req.query,req.params,body,originalRoute,method)
+            }
+            next();
+        })
+
         // subs/join/:ids 
         app[method](`/${config.rootEndPoint}/${route}`, async (req, res) => {
+
+
+
             let getCallback = await this._getMethodCallback(originalRoute, methodFile);
             try {
                 // dynamic route params can be accessed from req.params.paramName ex : req.params.users
@@ -95,7 +137,7 @@ class Blaze {
         });
     }
 
-    isArrowFunc(func){
+    isArrowFunc(func) {
         // this is for dev edge case swc transpilation problem
         // let b = func.toString().includes("return")
         // for arrow functions hasOwnPoperty would be false and true for normal funcs
@@ -107,9 +149,9 @@ class Blaze {
 
     async _getMethodCallback(route, methodFile) {
 
-        let pathToFile = this.lang == "ts" 
-            ? 
-        `file:///${process.cwd()}/blazze/.${route+"."+methodFile}.js`
+        let pathToFile = this.lang == "ts"
+            ?
+        `file:///${process.cwd()}/blazze/.${route + "." + methodFile}.js`
             :
         `file:///${process.cwd()}/${config.rootEndPoint}/${route}/${methodFile}.js`
 
@@ -120,9 +162,9 @@ class Blaze {
             errorRed(`[Blaze Error]: No default function was exported from the "${methodFile}.${this.lang}" file in route "${route}". ${safe("Did you forgot to add export default ??")}`);
 
             process.exit(1);
-        }   
+        }
 
-        if(this.isArrowFunc(methodCallback.default)){
+        if (this.isArrowFunc(methodCallback.default)) {
             warning(`[Blazze warning]: You are exporting a arrow functions from file ${route}/${methodFile}.${this.lang}, it could ${danger("cause build errors")} on running "npm run build". Consider ${safe("converting it normal function")} to fix this warning !!`)
         }
 
