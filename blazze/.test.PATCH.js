@@ -1,3 +1,1 @@
-export default function(req, res) {
-    res.json("THIS IS A PATCH REQUEST HANDLER !!");
-}
+export default function(req,res){var data;try{data="1234567"}catch(error){data=error}res.json({mes:"THIS IS A PATCH REQUEST HANDLER !@",data:data})}
