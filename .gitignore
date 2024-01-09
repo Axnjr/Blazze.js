@@ -7,3 +7,7 @@ blaze.cache.json
 blaze.config.js
 
 blaze.build.js
+
+cache
+
+website/node_modules

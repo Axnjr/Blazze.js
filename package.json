@@ -41,7 +41,8 @@
     },
     "devDependencies": {
         "@types/express": "^4.17.21",
-        "@types/node": "^20.10.4"
+        "@types/node": "^20.10.4",
+        "@types/nodemon": "^1.19.6"
     },
     "type": "module"
 }

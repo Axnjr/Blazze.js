@@ -19,7 +19,7 @@ async function BlazeInit() {
         default: "api/v1"
     });
     const TS = await confirm({
-        message: chalk.whiteBright("Would you like to use " + chalk.magentaBright("TypeScript") + " ??"),
+        message: chalk.whiteBright("Would you like to use " + chalk.magentaBright("TypeScript") + " ?"),
         default: false
     });
     const port = await input({
@@ -30,6 +30,10 @@ async function BlazeInit() {
         message: chalk.whiteBright("Where would you like to keep your static conetent like html, png's files ?"),
         default: "public"
     });
+    const cache = await confirm({
+        message: chalk.whiteBright("Would you like to"+chalk.magentaBright(" enable request caching")+" ?"+chalk.yellowBright("\nIt could be a extra over-head, only opt for it if some expensive computation needs to be cached.")),
+        default: false
+    });
     const spinner = ora(chalk.bold.rgb(98, 0, 255)(" Configuring your Blazze App ")).start();
 
     await new Promise(resolve => { setTimeout(() => { resolve() }, 500) })
@@ -39,7 +43,8 @@ async function BlazeInit() {
         TS: TS,
         port: port,
         staticRoot: staticRoot,
-        resolvePath:resolvePath
+        resolvePath:resolvePath,
+        cacheRequests:cache
     }, null, 4)}`);
 
     writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
@@ -49,14 +54,15 @@ async function BlazeInit() {
     }
 
     spinner.succeed();
+
     console.log(chalk.greenBright("Success !"),`Created ${name} at ${process.cwd()}`)
     console.log(chalk.whiteBright(`Run commands:
 
         - npm i
         - npm run dev
     `))
-    console.log(chalk.bold.rgb(98, 0, 255)(`You are ready to Blazze 🚀. Refer docs at http://blazze/docs.`))
 
+    console.log(chalk.bold.rgb(98, 0, 255)(`You are ready to Blazze 🚀. Refer docs at http://blazze/docs.`))
 }
 
 

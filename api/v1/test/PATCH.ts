@@ -1,5 +1,18 @@
-import { Request, Response } from "express";
+import { Request, Response } from "express"
+import nodemon from "nodemon";
 
 export default function (req:Request,res:Response){
-    res.json("THIS IS A PATCH REQUEST HANDLER !!");
+
+    let data;
+
+    try {
+        data = "1234567"
+    } catch (error) {
+        data = error
+    }
+
+    res.json({
+        mes:"THIS IS A PATCH REQUEST HANDLER !@",
+        data:data
+    });
 }
