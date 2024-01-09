@@ -43,5 +43,5 @@ export async function chconf() {
         process.exit(1)
         return config
     }
-    return temp.blazeConfig ?? config
+    return temp.blazeConfig
 }

@@ -4,6 +4,7 @@ export interface config {
     port: string;
     staticRoot: string;
     resolvePath:string;
+    cacheRequests:boolean;
 }
 export function chconf() : Promise<config>
 export function whiteMessage() : void
