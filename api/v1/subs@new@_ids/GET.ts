@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import chalk from 'chalk';
+import { Request, Response } from "express"
+import chalk from 'chalk'
 
 export default async function (req:Request,res:Response){
 
