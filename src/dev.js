@@ -3,23 +3,15 @@ import express from "express";
 import { existsSync, mkdirSync, readFileSync, watch, writeFileSync } from "fs";
 import { chconf, errorRed, infoGreyDev, warning, safe, danger } from "./chconf.js"
 import { revalidateCache } from "./cache.js";
-import nodemon from "nodemon";
 
 const config = await chconf()
 const app = express();
 
 // Extend the response object's prototype
 express.response.logResponse = function (reqQuery,reqParams,body,route,method) {
-    errorRed("CACHING REQUEST ....")
-    if(!existsSync("cache")){
-        mkdirSync("cache", {recursive:true})
-    }
+    if(!existsSync("cache")){ mkdirSync("cache", {recursive:true}) }
 
-    let temp = route+"."+method
-
-    // writeFileSync(config.resolvePath+"src/cache.Hint.json", JSON.stringify({
-    //     temp:true
-    // }))
+    let temp = "."+route+"."+method
 
     writeFileSync(`cache/${temp}.js`, `
         export const cache = ${JSON.stringify({
@@ -36,10 +28,7 @@ express.response.logResponse = function (reqQuery,reqParams,body,route,method) {
 
 class Blaze {
 
-    cache;
-
     constructor() {
-        // this.cache = { GET: [], POST: [], DELETE: [], PUT: [], PATCH: [] };
         this._listenToChanges();
         this.cache = JSON.parse(readFileSync(`./blaze.cache.json`, "utf-8"));
         this._startBlazeServer();
@@ -50,7 +39,6 @@ class Blaze {
     _listenToChanges() {
         watch(config.rootEndPoint, { recursive: true, persistent: false })
             .on("change", (event) => {
-                console.log('Something changed !!')
                 if (event == "rename") {
                     infoGreyDev("[A new route has been created or deleted revalidating cache !!]")
                     revalidateCache("Revalidating ...")
@@ -82,9 +70,6 @@ class Blaze {
 
         app.use(express.static(config.staticRoot ?? "public"));
         app.listen(config.port);
-
-       
-
         return;
     }
 
@@ -98,59 +83,64 @@ class Blaze {
 
     _dynamicExpressExecuter(method, route) {
         let methodFile = method.toUpperCase(), originalRoute = route;
-
         // If Route is /subs/join/:id then it is represented as subs@join@_ids 
-        // // sub/join/_ids
-     
         route = route.replaceAll("@","/").replaceAll("_",":")
-
-        app.use(`/${config.rootEndPoint}/${route}`, async (req, res, next) => {
-            let originalResSend = res.send
-            res.send = function(body){
-                originalResSend.apply(res, arguments)
-                res.logResponse(req.query,req.params,body,originalRoute,method)
-            }
-            next();
+        // to cache requests
+        app.use(`/`, async (req, res, next) => {
+            this._cacheMiddleware(req,res,next,originalRoute,method);
         })
-
         // subs/join/:ids 
         app[method](`/${config.rootEndPoint}/${route}`, async (req, res) => {
-
-            let cachedReq;
-
-            try {
-                cachedReq = await import("file:///"+process.cwd()+"/cache/"+originalRoute+"."+method+".js")
-                const { Key, Value } = cachedReq.cache
-
-                if(JSON.stringify(Key.query) == JSON.stringify(req.query)){
-                    console.log("Cache hit !!")
-                    res.send(Value)
-
-                    return;
-                }
-            } 
-            catch (error) {errorRed(error)}
-
+            if( await this._checkRequestCache(req,res,originalRoute,method) ){ return; }
             // a place to store cached requests
             // if req was in cache then return cached value
             // if req was not in cache then move it after executing
-            console.log("Cache miss !!")
             let getCallback = await this._getMethodCallback(originalRoute, methodFile);
             try {
                 // dynamic route params can be accessed from req.params.paramName ex : req.params.users
                 await getCallback(req, res);
             }
-
             catch (error) { // error in function
-                errorRed(`[Blaze Error at ${methodFile} in route ${route}] - ${error}`);
 
+                errorRed(`[Blaze Error at ${methodFile} in route ${route}] - ${error}`);
                 res.status(500).send(JSON.stringify({
                     message: "Something went wrong !",
                     Error: error,
                     status: 500
                 }));
+
             }
         });
+    }
+
+    _cacheMiddleware(req,res,next,originalRoute,method){
+        let originalResSend = res.send
+            res.send = function(body){
+                originalResSend.apply(res, arguments)
+                res.logResponse(req.query,req.params,body,originalRoute,method)
+            }
+        next();
+        return;
+    }
+
+    async _checkRequestCache(req,res,originalRoute,method){
+        let cachedReq;
+        if(existsSync("cache/"+"."+originalRoute+"."+method+".js")){
+            try {
+                cachedReq = await import("file:///"+process.cwd()+"/cache/"+"."+originalRoute+"."+method+".js")
+                const { Key, Value } = cachedReq.cache
+
+                if(JSON.stringify(Key.query) == JSON.stringify(req.query)){
+                    console.log(safe("Cache HIT ✓"));
+                    res.send(Value)
+
+                    return true; // true means success
+                }
+            } 
+            catch (error) {infoGreyDev("At dev: ====",error)}
+        }
+
+        return false;
     }
 
     isArrowFunc(func) {
