@@ -27,8 +27,12 @@ A light-weight express framework to write typesafe API's with zero configuration
 
 ## How to start ? 
 
-- Install blazze
+- Install blazze `npm i blazze@latest`
 - ```npx blazze-init```
+- You will be asked a few questions to configure `blazze.config.js`
+  
+  <img width="" alt="Screenshot 2024-01-11 222945" src="https://github.com/Axnjr/Blazze.js/assets/111436589/c9f09ffe-953e-43a5-bd52-ef2f8ee376e0">
+  
 - Create your API routes in the root-endpoint directory 
 - Each route can have 5 http method files viz: GET, POST, PUT, PATCH, DELETE
 - Each files handles specific API request methods
