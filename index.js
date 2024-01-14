@@ -92,6 +92,10 @@ async function transpileTs(routeToTsFile,logMesBool) {
             filename:routeToTsFile
         })
 
+        if(!existsSync("blazze")){
+            mkdirSync("blazze")
+        }
+
         writeFileSync(`blazze/${routeToTsFile.replaceAll("/",".").replace("ts","js")}`, jsFromTs.code)
 
         let end = performance.now()
