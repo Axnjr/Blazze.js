@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import express from "express";
 import { existsSync, mkdirSync, readFileSync, watch, writeFileSync } from "fs";
+import helmet from "helmet";
 import { chconf, errorRed, infoGreyDev, warning, safe, danger } from "./chconf.js"
 import { revalidateCache } from "./cache.js";
 
 const config = await chconf()
-const app = express();
+const app = express(helmet(config.helmetConfig ?? undefined));
 
 // Extend the response object's prototype
 express.response.logResponse = function (reqQuery,reqParams,body,route,method) {

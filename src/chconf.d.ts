@@ -1,3 +1,5 @@
+import { OutgoingHttpHeader } from "http";
+
 export interface config {
     rootEndPoint: string;
     TS: boolean;
@@ -5,7 +7,9 @@ export interface config {
     staticRoot: string;
     resolvePath:string;
     cacheRequests:boolean;
+    helmetConfig: OutgoingHttpHeader | any;
 }
+
 export function chconf() : Promise<config>
 export function whiteMessage() : void
 export function warning() : void

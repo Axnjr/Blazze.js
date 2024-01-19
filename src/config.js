@@ -44,7 +44,8 @@ async function BlazeInit() {
         port: port,
         staticRoot: staticRoot,
         resolvePath:resolvePath,
-        cacheRequests:cache
+        cacheRequests:cache,
+        helmetConfig:{}
     }, null, 4)}`);
 
     writeFileSync("package.json", JSON.stringify(getPackageJson(TS,name), null, 4))
