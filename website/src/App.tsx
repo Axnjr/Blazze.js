@@ -1,100 +1,49 @@
-"use server"
-import { BackgroundGrid } from './components/grid'
-import { BeamOfLight } from './components/beam'
-import DogeSmile from "/doge.webp"
+// "use server"
+"use client";
+// import { BackgroundGrid } from './components/grid'
 import './App.css'
-import ImgCards from "./components/imgCards"
 import Navigation from "./components/nav"
 import Hero from './components/hero'
-import { FeatureCard } from './components/cards'
-
-const features = [
-	{ name: "Routing", description: "Keep the logic separated without any setup. Routes are based on the directory structure." },
-	{ name: "Easy Setup", description: "Hit `npx blazze-init` to start building your projects." },
-	{ name: "TypeScript", description: "No configurations and environment setup, just get started directly" },
-	{ name: "Build Optimization", description: "Makes a single optimized bundle for your app"},
-	{ name: "No Boiler Plate Code", description: "Install init and start nothing else :)" },
-	{ name: "Powered by SWC", description: "Super speed transpilation via the power of Rust." },
-	{ name: "Fast & Robust", description: "Built on top of express, for better developer experience." }
-]
+import Features from './components/features'
+import Docs from './components/docs'
+import Modes from './components/modes';
 
 export default function App() {
 	return (
 		<>
-			<main className="w-full m-auto h-fit p-8 overflow-hidden">
-				<BeamOfLight />
+			<main className="w-full m-auto h-fit pt-20 overflow-hidden bg-white dark:bg-black text-black dark:text-white">
 				<Navigation />
-				<div className="absolute inset-0 overflow-hidden opacity-50 -z-30">
-					<BackgroundGrid />
-				</div>
-				<div className="grid m-auto grid-rows-1 lg:grid-cols-2 w-full h-full lg:h-screen items-center justify-center mt-24 lg:mt-8 px-8">
+				<div className='m-auto w-full h-full flex flex-col items-center justify-center text-center'>
 					<Hero />
-					<ImgCards />
 				</div>
-				<section className='relative w-full h-full mt-20'>
-					<div className="mx-auto  mb-[64px] grid max-w-[1400px] items-center justify-center px-4 sm:px-24 md:px-4 lg:px-24">
-						<div className="flex flex-col  items-center justify-center gap-16">
-							<div className="mt-1 flex flex-col gap-3 px-4 text-center sm:px-0">
-								<a className="mx-auto hidden rounded-full bg-gradient-to-r from-[#ffffff] to-blue-500 p-[1px] brightness-90 contrast-150 focus:outline-none focus:ring-blue-600 focus-visible:ring-2 dark:brightness-125 dark:contrast-100 sm:block" href="#features">
-									<div className="group relative overflow-hidden rounded-full bg-white/80 px-3 py-1 duration-300 hover:pr-9 dark:bg-black/80">
-										<span className="select-none bg-gradient-to-r from-[#31bdc6] to-[#3178c6] bg-clip-text text-transparent">
-											<svg
-												className="mr-1 inline-block h-4 w-4 fill-[#31bdc6]"
-												viewBox="4 4 48 48"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path d="m19.2 36.4-4.75-10.45L4 21.2l10.45-4.75L19.2 6l4.75 10.45L34.4 21.2l-10.45 4.75ZM36.4 42l-2.35-5.25-5.25-2.35 5.25-2.4 2.35-5.2 2.4 5.2 5.2 2.4-5.2 2.35Z" />
-											</svg>
-											Many features, Wow
-											<img
-												className="absolute -bottom-1 right-1 translate-y-7 duration-300 group-hover:translate-y-0"
-												alt="doge smile"
-												height="28"
-												width="28"
-												src={DogeSmile}
-											/>
-										</span>
-									</div>
-								</a>
-
-								<h1 className='text-5xl m-4 tracking-tighter font-black'>
-									What's in Blazze ?
-								</h1>
-								<p className='text-neutral-400/90 text-md'>All you need to write API's with ease & peace 😌</p>
-
-								<br />
-
-								<div className='relative z-10 grid w-full gap-4 md:grid-cols-2 lg:gap-8'>
-								{
-									features.map((f, id) => {
-										return <FeatureCard key={id} className='w-[100%] h-fit hover:shadow-2xl shadow-blue-500'>
-											<div className='w-full h-44 p-8 rounded-xl bg-neutral-500/10 hover:bg-neutral-500/20 flex 
-											flex-col items-start justify-center text-left gap-2 '>
-												<h1 className=' tracking-tighter font-black text-3xl m-4'>{f.name}</h1>
-												<p className='px-4 text-sm'>{f.description}</p>
-											</div>
-										</FeatureCard>
-									})
-								}
-								</div>
-
-							</div>
-						</div>
+				<Features />
+				<Docs />
+				<div className='py-20 md:py-12 text-left w-full text-sm sm:text-base h-12 border-t flex flex-col gap-6 md:flex-row items-start md:items-center justify-center md:justify-between md:px-12 px-6'>
+					<span>Built with devotion by <a className="underline" href="https://twitter.com/axnjrno1"> Axn</a>. Improve this page on <a className="underline" href="https://github.com/Axnjr/Blazze-Home">Github</a>.</span>
+					<div className='flex items-center gap-2'>
+						<Modes/>
+						<svg className="h-8 w-8 fill-black dark:fill-white bg-neutral-200 dark:bg-neutral-800 p-2 rounded-xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>
+						<svg className="h-8 w-8 fill-black dark:fill-white bg-neutral-200 dark:bg-neutral-800 p-2 rounded-xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>
 					</div>
-				</section>
+				</div>
 			</main>
 		</>
 	)
 }
 
 /**
- * {
-									features.map((f,id) => {
-										return <FeatureCard key={id}>
-										<div className='w-full h-24 rounded-xl bg-neutral-500/10 hover:bg-neutral-500/20 flex items-center justify-center'>
-											<h1 className='heading text-3xl'>{f}</h1>
-										</div>
-									</FeatureCard>
-									})
-								}
+ * 
+ * 1 - Install blazze
+ * 2 - blazze-init
+ * 3 - Create your API routes in the root-endpoint directory
+ * 4 - Each route can have 5 http method files viz: GET, POST, PUT, PATCH, DELETE
+ * 5 - Each files handles specific API request methods
+ * 6 - You need to export a default normal function from each file
+ * 7 - These functions get Express Request and Response objects as parameters
+ * 8 - ex: ....
+ * 9 - For nested routes use "@" symbol ex: new/subs/ppl will be -> new@subs@ppl which will have its respective logic
+ * 10 - This is to avoid deep recursive file watching and being more performent for the system
+ * 11 - Dynamic routes start with a underscore "_" ex: api/v1/_users 
+ * 12 - That's it you are ready to blazze ...
+ * 
  */
