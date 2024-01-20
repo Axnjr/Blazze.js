@@ -4,53 +4,50 @@
 
 @font-face {
   font-family: "tw";
-  font-weight: 900;
-  src: url("./assets//Inter-SemiBold.woff2");
+  src: url("./assets/4f117ec02fc103f8-s.p.woff2");
 }
 
 @font-face {
   font-family: "inter";
-  font-weight: 900;
+  font-weight: 600;
   src: url("./assets//c9a5bc6a7c948fb0-s.p.woff2");
 }
 
+body {
+  background-color: #fff; /* Light mode background color */
+  color: #333; /* Light mode text color */
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Dark mode styles */
+  body {
+    background-color: #1a202c;
+    color: #cbd5e0;
+  }
+}
+
 .heading{
+  font-family: "tw",sans-serif;
+  font-weight: 800;
+}
+
+.para{
   font-family: "inter",sans-serif;
 }
 
 :root {
   font-family: "tw", sans-serif;
-  color-scheme: light dark;
-  color: rgb(255, 255, 255);
-  background-color: #000000;
+  font-weight: 400;
+  color-scheme: "" dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ::-webkit-scrollbar{display: none;} */
-
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1400px;
-  overflow: hidden;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -75,20 +72,5 @@ button {
 
   100% {
     --gradient-angle: 0deg;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
   }
 }
