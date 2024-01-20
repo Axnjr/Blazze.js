@@ -1,6 +1,4 @@
 // "use server"
-"use client";
-// import { BackgroundGrid } from './components/grid'
 import './App.css'
 import Navigation from "./components/nav"
 import Hero from './components/hero'
