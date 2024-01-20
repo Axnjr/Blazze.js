@@ -1,13 +1,13 @@
 {
     "name": "blazze",
-    "version": "1.3.0",
+    "version": "1.3.2",
     "description": "The express framework for the web. Write Typesafe API's with no configuration and boiler-plate with dynamic directory based routing and intuitive CLI.",
     "main": "index.js",
     "repository": "Axnjr/Blazze.js",
     "scripts": {
         "build": "node src/build.js",
         "init": "node src/config.js",
-        "dev": "node src/index.js"
+        "dev": "node index.js"
     },
     "bin": {
         "blazze-init": "src/config.js",
