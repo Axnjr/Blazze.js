@@ -1,32 +1,43 @@
-import { Balancer } from "react-wrap-balancer"
+// import { Balancer } from "react-wrap-balancer"
 
 export default function Hero() {
     return (
-        <div className="w-full lg:w-3/2 h-full flex flex-col gap-10 items-center lg:items-start justify-center">
-            <a target="_blank" rel="noreferrer" href="https://github.com/typehero/typehero" className="group rounded-full bg-gradient-to-r from-white to-blue-500 bg-[length:420%_420%] bg-right-bottom p-[1px] brightness-90 contrast-150 duration-500 hover:bg-left-top hover:shadow-[0_0_2rem_-0.5rem_#3178c6] dark:from-yellow-500 dark:via-white dark:to-[#5971fb] dark:brightness-125 dark:contrast-100 dark:hover:shadow-[0_0_2rem_-0.5rem_#fff8]">
-                <div className="rounded-full bg-white/80 px-3 py-1 dark:bg-black/80">
-                    <span className="animate-bg-gradient-to-center font-black relative flex select-none items-center bg-gradient-to-r to-70% bg-[length:420%_420%] bg-clip-text bg-right-bottom text-transparent duration-500 group-hover:bg-left-top from-yellow-500 via-white to-blue-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={2} height={2} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
-                            className="animate-newstar mr-2 h-4 w-4 stroke-2 duration-500 group-hover:rotate-180 group-hover:scale-110 stroke-blue-500 dark:duration-500 group-hover:stroke-white group-hover:fill-white"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" />
-                        </svg>
-                        Star it on GitHub
-                    </span>
-                </div>
-            </a>
-            <div className="relative flex w-full items-center justify-center gap-2 lg:justify-start">
-                <h1 className="heading text-8xl lg:text-7xl text-center lg:text-left font-black tracking-tight
-                capitalize bg-gradient-to-br from-white to-blue-500 bg-clip-text text-transparent">
-                    The express<br />
-                    framework<br />
-                    for the web.
+        <div className="w-full h-fit flex flex-col gap-4 items-center justify-start py-20 md:py-24 ">
+            <div className="bg-neutral-100 dark:bg-neutral-900 py-1 px-2 rounded-lg text-xs sm:text-sm md:text-base font-medium">
+                🎉 Introducing yet another js framework, Blazze.js
+            </div>
+            <div className="relative flex w-fit mx-auto text-center ">
+                <h1 className="text-4xl sm:text-6xl lg:text-6xl text-center tracking-tighter font-[700]
+                px-12 py-2 rounded-2xl lg:[word-spacing:-1.5px] text-black dark:text-white">
+                    Build your web apps with ease
                 </h1>
             </div>
-            <p className="max-w-3/2 w-10/12 text-center font-medium leading-0 mb-4 text-lg lg:text-md sm:px-8 lg:px-0 lg:text-left
-            text-neutral-500">
-                <Balancer>
-                    A light-weight express framework to write typesafe API's with zero configuration, no boiler-plate blazingly fast.
-                </Balancer>
-            </p>
+            <div className="max-w-2/3 w-8/12 text-center font-medium text-sm md:text-lg tracking-tight leading-0 my-2 text-zinc-500 ">
+                Blazze.js enables you to write Typesafe API's for the web with ease and powerfull Rust-based JavaScript
+                tooling for the fastest builds. It makes you complete your projects blazzingly fast.
+            </div>
+
+            <div className="flex items-center justify-center gap-5 z-50">
+                <button className="py-2 px-4 dark:bg-white bg-black text-white dark:text-black text-xs sm:text-sm md:text-base rounded-xl hover:bg-black/90 dark:hover:bg-white/90">
+                    Star on Github🎉
+                </button>
+                <button className="px-4 py-2 rounded-xl flex items-center dark:hover:bg-neutral-900 z-50 text-xs sm:text-sm md:text-base 
+			    bg-white dark:bg-neutral-950 dark:border-neutral-900 border-neutral-100 border-2 group hover:bg-neutral-100 ">
+                    Get Started 🚀
+                </button>
+            </div>
+
+            {/* <div className="w-full h-1 shadow-[0_0_8rem_1rem_#3b82f6] bg-transparent"></div> */}
+            
+
         </div>
     )
 }
+
+
+{/* <div className="rounded-2xl h-96 lg:w-full md:h-[34rem] mt-4 shadow-[0_0_8rem_.5rem_#669eff] lg:shadow-none">
+    <section className="flex flex-col lg:flex-row items-center justify-center gap-2 w-11/12 h-full m-auto">
+        <img className="w-1/2 h-full hidden lg:block lg:scale-[1.005] lg:shadow-[0_0_8rem_.5rem_#669eff] rounded-2xl" src="./dir.svg" alt="" />
+        <img className="w-full z-10 bg-cover lg:w-1/2 h-full lg:shadow-[0_0_8rem_.5rem_#669eff] rounded-2xl" src="./img.svg" alt="" />
+    </section>
+</div> */}
