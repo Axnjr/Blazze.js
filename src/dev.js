@@ -10,11 +10,11 @@ const app = express(helmet(config.helmetConfig ?? undefined));
 
 // Extend the response object's prototype
 express.response.logResponse = function (reqQuery,reqParams,body,route,method) {
-    if(!existsSync("cache")){ mkdirSync("cache", {recursive:true}) }
+    if(!existsSync(config.rootEndPoint+"/cache")){ mkdirSync(config.rootEndPoint+"/cache", {recursive:true}) }
 
-    let temp = "."+route+"."+method
+    let temp = route+method
 
-    writeFileSync(`cache/${temp}.js`, `
+    writeFileSync(`${config.rootEndPoint}/cache/${temp}.js`, `
         export const cache = ${JSON.stringify({
             Key: {
                 query: reqQuery,
@@ -93,10 +93,9 @@ class Blaze {
         // subs/join/:ids 
         app[method](`/${config.rootEndPoint}/${route}`, async (req, res) => {
             if( await this._checkRequestCache(req,res,originalRoute,method) ){ return; }
-            // a place to store cached requests
             // if req was in cache then return cached value
             // if req was not in cache then move it after executing
-            let getCallback = await this._getMethodCallback(originalRoute, methodFile);
+            let getCallback = await this._getMethodCallback(originalRoute, method);
             try {
                 // dynamic route params can be accessed from req.params.paramName ex : req.params.users
                 await getCallback(req, res);
@@ -118,26 +117,36 @@ class Blaze {
         let originalResSend = res.send
             res.send = function(body){
                 originalResSend.apply(res, arguments)
-                res.logResponse(req.query,req.params,body,originalRoute,method)
+                res.logResponse(req.query, req.params, body, originalRoute, method)
             }
         next();
         return;
     }
 
     async _checkRequestCache(req,res,originalRoute,method){
+
         let cachedReq;
-        if(existsSync("cache/"+"."+originalRoute+"."+method+".js")){
+
+        if(existsSync(config.rootEndPoint+"/cache/"+originalRoute+method+".js")){
+
             try {
-                cachedReq = await import("file:///"+process.cwd()+"/cache/"+"."+originalRoute+"."+method+".js")
+
+                let pathToCache = "file:///"+process.cwd()+"/"+config.rootEndPoint+"/cache/"+originalRoute+method+".js";
+
+                cachedReq = await import(pathToCache)
+
                 const { Key, Value } = cachedReq.cache
 
                 if(JSON.stringify(Key.query) == JSON.stringify(req.query)){
+
                     console.log(safe("Cache HIT ✓"));
+                    // send the cached value
                     res.send(Value)
 
                     return true; // true means success
                 }
             } 
+            
             catch (error) {infoGreyDev("At dev: ====",error)}
         }
 
@@ -158,7 +167,7 @@ class Blaze {
 
         let pathToFile = this.lang == "ts"
             ?
-        `file:///${process.cwd()}/blazze/.${route + "." + methodFile}.js`
+        `file:///${process.cwd()}/blazze/${route+methodFile}.js`
             :
         `file:///${process.cwd()}/${config.rootEndPoint}/${route}/${methodFile}.js`
 
