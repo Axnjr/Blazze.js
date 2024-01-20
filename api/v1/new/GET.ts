@@ -1,8 +1,7 @@
-import { Request, Response, Express } from "express"
+import { Request, Response } from "express"
 
 export default async function (req:Request,res:Response){
     let data, r = req.query.q
-    
     try {
         data = await fetch(`https://freeaiapi.vercel.app/api/Sentiments?query='${r}'`)
     } catch (error) {
