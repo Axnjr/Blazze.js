@@ -11,8 +11,16 @@
 .hero{
   background-image: url("../grd.svg");
   background-position: top;
-  background-size: 125%;
+  background-size: 185%;
+  background-repeat: no-repeat;
   /* animation: bgmove 30s ease infinite; */
+}
+
+@media screen and (min-width: 640px){
+  .hero{
+    background-size: 85%;
+    background-position: 5rem;
+  }
 }
 
 .getRouteImg{
