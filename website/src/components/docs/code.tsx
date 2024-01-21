@@ -3,7 +3,7 @@ export function CodeSection({ children, type }: { children?: React.ReactNode, ty
         className={
             type == "big"
                 ?
-            `text-sm tracking-tighter text-left w-full sm:w-11/12 lg:w-1/2 p-4  overflow-x-scroll whitespace-nowrap
+            `text-sm tracking-tight text-left w-full sm:w-11/12 lg:w-1/2 p-4  overflow-x-scroll whitespace-nowrap
             bg-neutral-100 dark:bg-neutral-900 rounded-lg mx-2 text-black border shadow-lg
             dark:border-neutral-800 dark:text-white `
                 :

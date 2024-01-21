@@ -1,6 +1,6 @@
 import Modes from './modes'
 
-function Links(){
+function Links() {
 	return <div className="flex flex-col-reverse gap-3 md:flex-row">
 		<div className="flex gap-2 md:gap-4 items-center">
 			<a className="p-2 rounded-xl px-3 dark:hover:bg-neutral-800 flex items-center
@@ -15,24 +15,28 @@ function Links(){
 				</svg>
 				<span className="font-medium text-[0.89rem] hidden sm:block">TwitterX</span>
 			</a>
-			<Modes/>
+			<Modes />
 		</div>
 	</div>
 }
 
 
 export default function Navigation() {
-    return (
-        <nav className="absolute z-50 top-0 left-0 w-full h-fit py-4 px-6 text-right flex items-center justify-between 
-			border-b dark:border-neutral-800 border-neutral-200">
-            <h1 className="text-2xl font-bold tracking-tighter cursor-copy">
-				&nbsp;Blazze
-				<span className="para text-[0.7rem]">. JS</span>
-                {/* <span className="text-2xl ">🏎️</span> */}
-            </h1>
-            <div className="flex items-center gap-4">
-                <Links />
-            </div>
-        </nav>
-    )
+	return (
+		<nav className="absolute z-50 top-0 left-0 w-full h-fit py-4 px-6 text-right flex items-center justify-between ">
+			<div className="text-2xl font-bold tracking-tighter cursor-copy flex items-center">
+				<svg className='w-9 rotate-12 mt-2 -mr-1 h-9 dark:fill-white fill-black' xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 125" enableBackground="new 0 0 100 100" xmlSpace="preserve">
+					<polygon points="65.242836,5.1528473 15.5359373,55.9843407 50.8480797,51.2610588 26.5569248,94.6702576 83.23629,36.6413841   49.7234917,36.6413841 " />
+				</svg>
+				<h1>
+					&nbsp;Blazze
+					<span className="para text-[0.7rem]">. JS</span>
+				</h1>
+				{/* <span className="text-2xl ">🏎️</span> */}
+			</div>
+			<div className="flex items-center gap-4">
+				<Links />
+			</div>
+		</nav>
+	)
 }

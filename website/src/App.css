@@ -8,6 +8,13 @@
   text-align: center;
 }
 
+.hero{
+  background-image: url("../grd.svg");
+  background-position: top;
+  background-size: 125%;
+  /* animation: bgmove 30s ease infinite; */
+}
+
 .getRouteImg{
   background-image: url("../public/img.png");
 }

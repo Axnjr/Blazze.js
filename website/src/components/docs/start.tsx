@@ -14,15 +14,15 @@ export default function StartBuilding() {
         >
             <CodeSection type="big">
                 <div>
-                    <span className="text-neutral-500 text-xs">_users/GET.ts</span>
-                    <br />
-                    <br />
                     import {"{"} <span>Request, Response</span> {"}"} from <span >"express"</span>;
                     <br />
                     <br />
                     <span>export </span>default async function (<span>req</span>: Request,<span>res</span>: Response){"{"}
                     <br />
-                    &nbsp;&nbsp;&nbsp; <span className="text-neutral-500">// do something usefull here ...</span><br />
+                    <br />
+                    &nbsp;&nbsp;&nbsp; <span className="text-neutral-500">// do something usefull here ...</span>
+                    <br />
+                    <br />
                     &nbsp;&nbsp;&nbsp; let query = req.query;<br />
                     &nbsp;&nbsp;&nbsp; let params = req.params;<br />
                     {"}"}

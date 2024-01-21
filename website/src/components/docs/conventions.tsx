@@ -15,12 +15,12 @@ export default function Conventions() {
             <CodeSection type="big">
                 <div>
                     <span className="text-neutral-500">1.</span> For nested route like this
-                    <span className="text-blue-500"> "users/new/payments"</span> create this <br />
-                    <span className="text-blue-500">&nbsp;&nbsp; "users@new@payments"</span> route folder.
+                    <span className=""> "users/new/payments"</span> create this <br />
+                    <span className="">&nbsp;&nbsp; "users@new@payments"</span> route folder.
                     <br />
                     <br />
                     <span className="text-neutral-500">2.</span> For dynamic routes create folder with "_" (underscore)<br />
-                    &nbsp;&nbsp; at the beggining ex: <span className="text-blue-500"> "_users"</span>
+                    &nbsp;&nbsp; at the beggining ex: <span className=""> "_users"</span>
                 </div>
             </CodeSection>
             <div className='group w-full sm:w-11/12 lg:w-1/2 lg:px-8 rounded-xl flex flex-col items-start text-left gap-2 mb-8 lg:mb-0 lg:-mt-2'>

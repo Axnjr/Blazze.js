@@ -1,5 +1,3 @@
-// import { Balancer } from "react-wrap-balancer"
-
 export default function Hero() {
     return (
         <div className="w-full h-fit flex flex-col gap-4 items-center justify-start py-20 md:py-24 ">
@@ -26,10 +24,6 @@ export default function Hero() {
                     Get Started 🚀
                 </button>
             </div>
-
-            {/* <div className="w-full h-1 shadow-[0_0_8rem_1rem_#3b82f6] bg-transparent"></div> */}
-            
-
         </div>
     )
 }

@@ -26,9 +26,9 @@ export default function Create() {
         >
             <CodeSection type="big">
                 <div>
-                    npm install <span className="text-blue-500">blazze@latest</span>
+                    npm install blazze@latest -g
                     {" >> "}
-                    npx <span className="text-fuchsia-500">blazze-init</span>
+                    npx blazze-init
                     <br />
                     <br />
                     {cliQuestions.map((q, id) => {
