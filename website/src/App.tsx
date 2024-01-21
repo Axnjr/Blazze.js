@@ -1,4 +1,4 @@
-// "use server"
+"use server"
 import './App.css'
 import Navigation from "./components/nav"
 import Hero from './components/hero'
