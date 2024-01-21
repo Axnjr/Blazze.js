@@ -57,12 +57,12 @@ git push origin feature-branch
 
 ## Issue Tracking
 
-- Report issues [GitHub Issues page] (https://github.com/Axnjr/Blazze.js/issues)
-- Or suggest new features in the [Blazze Discussions] (https://github.com/Axnjr/Blazze.js/discussions).
+- Report issues [GitHub Issues page](https://github.com/Axnjr/Blazze.js/issues)
+- Or suggest new features in the [Blazze Discussions](https://github.com/Axnjr/Blazze.js/discussions).
 - Clearly describe the issue or feature, providing as much detail as possible.
 
 ## Code of Conduct
-Please review and adhere to our [Code of Conduct] (https://github.com/Axnjr/Blazze.js/blob/main/CODE_OF_CONDUCT.md) when participating in our community.
+Please review and adhere to our [Code of Conduct](https://github.com/Axnjr/Blazze.js/blob/main/CODE_OF_CONDUCT.md) when participating in our community.
 
 ## License
 By contributing to Blazze.js, you agree that your contributions will be licensed under the MIT License.
