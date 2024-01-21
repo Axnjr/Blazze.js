@@ -17,11 +17,11 @@ export default function Hero() {
 
             <div className="flex items-center justify-center gap-5 z-50">
                 <button className="py-2 px-4 dark:bg-white bg-black text-white dark:text-black text-xs sm:text-sm md:text-base rounded-xl hover:bg-black/90 dark:hover:bg-white/90">
-                    Star on Github🎉
+                    <a href="https://github.com/Axnjr/Blazze.js">Star on Github🎉</a>
                 </button>
                 <button className="px-4 py-2 rounded-xl flex items-center dark:hover:bg-neutral-900 z-50 text-xs sm:text-sm md:text-base 
 			    bg-white dark:bg-neutral-950 dark:border-neutral-900 border-neutral-100 border-2 group hover:bg-neutral-100 ">
-                    Get Started 🚀
+                    <a href="#docs">Get Started 🚀</a>
                 </button>
             </div>
         </div>

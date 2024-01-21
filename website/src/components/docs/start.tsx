@@ -38,7 +38,7 @@ export default function StartBuilding() {
                 </h1>
                 <div className='px-0 sm:px-4 text-sm'>
                     You need to <CodeSection type="small">export</CodeSection> a default normal function from each file,
-                    this function recives express <CodeSection type="small">req</CodeSection> & <CodeSection type="small">res</CodeSection> objects.
+                    this function recives express <CodeSection type="small">req</CodeSection> & <CodeSection type="small">res</CodeSection> objects from blazze.
                     <div className="bg-black text-white dark:bg-white dark:text-black font-medium p-4 sm:p-2 w-full rounded-lg mt-6 flex ">
                         ⚠️ Exporting arrow functions can cause build errors.
                     </div>

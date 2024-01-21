@@ -5,7 +5,7 @@ import StartBuilding from "./docs/start";
 
 export default function Docs() {
     return (
-        <div className='w-full h-fit relative mt-28 pt-20 text-center m-auto overflow-hidden flex 
+        <div id="docs" className='w-full h-fit relative mt-28 pt-20 text-center m-auto overflow-hidden flex 
             flex-col justify-center items-center '>
             <div className='w-fit h-fit p-4 bg-black dark:bg-white rounded-full my-6'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} className="w-16 h-16 dark:stroke-black stroke-white">
@@ -42,15 +42,11 @@ export default function Docs() {
 
                 <div className="flex items-center justify-center gap-5 z-50 ">
                     <button className="py-2 px-4 dark:bg-white bg-black text-white dark:text-black text-xs sm:text-sm md:text-base rounded-xl hover:bg-black/90 dark:hover:bg-white/90">
-                        Contribute to Blazze
+                        <a href="https://github.com/Axnjr/Blazze.js/blob/main/contributing.md">Contribute to Blazze</a>
                     </button>
-                    {/* <button className="px-4 py-2 rounded-xl flex items-center dark:hover:bg-neutral-900 z-50 text-xs sm:text-sm md:text-base 
-			        bg-white dark:bg-neutral-950 dark:border-neutral-900 border-neutral-100 border-2 group hover:bg-neutral-100 ">
-                        Improve this page 💥
-                    </button> */}
                     <button className="px-4 py-2 rounded-xl flex items-center dark:hover:bg-neutral-900 z-50 text-xs sm:text-sm md:text-base 
 			        bg-white dark:bg-neutral-950 dark:border-neutral-900 border-neutral-100 border-2 group hover:bg-neutral-100 ">
-                        Sponsor Blazze ❤️
+                        <a href="https://github.com/Axnjr/Blazze.js/tree/main/website">Improve this page</a>
                     </button>
                 </div>
 
