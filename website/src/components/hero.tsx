@@ -1,11 +1,13 @@
 export default function Hero() {
     return (
         <div className="w-full h-fit flex flex-col gap-4 items-center justify-start py-20 md:py-24 ">
-            <div className="bg-neutral-100 dark:bg-neutral-900 py-1 px-2 rounded-lg text-xs sm:text-sm md:text-base font-medium">
+            <div className="bg-neutral-50 dark:bg-neutral-900 py-1 px-2 rounded-lg text-xs 
+            sm:text-sm lg:text-base font-medium bg-gradient-to-r from-fuchsia-100 to-yellow-50
+            dark:from-red-950/10 dark:to-black">
                 🎉 Introducing yet another js framework, Blazze.js
             </div>
             <div className="relative flex w-fit mx-auto text-center ">
-                <h1 className="text-4xl sm:text-6xl lg:text-6xl text-center tracking-tighter font-[700]
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl text-center tracking-tighter font-[700]
                 px-12 py-2 rounded-2xl lg:[word-spacing:-1.5px] text-black dark:text-white">
                     Build your web apps with ease
                 </h1>

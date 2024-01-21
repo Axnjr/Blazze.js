@@ -14,7 +14,7 @@ const features = [
 
 export default function Features() {
     return (
-        <section className='relative w-full h-full mt-28'>
+        <section className='relative w-full h-full pt-28'>
             <div className="mx-auto  mb-[64px] grid max-w-[1400px] items-center justify-center px-4 sm:px-24 md:px-4 lg:px-24">
                 <div className="flex flex-col  items-center justify-center gap-16">
                     <div className="mt-1 flex flex-col gap-3 px-4 text-center sm:px-0">
