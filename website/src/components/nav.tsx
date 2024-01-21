@@ -15,7 +15,7 @@ function Links() {
 				</svg>
 				<span className="font-medium text-[0.89rem] hidden sm:block">TwitterX</span>
 			</a>
-			<Modes />
+			<div className='bg-neutral-200 dark:bg-neutral-900 rounded-xl p-2'><Modes/></div>
 		</div>
 	</div>
 }
@@ -32,7 +32,6 @@ export default function Navigation() {
 					&nbsp;Blazze
 					<span className="para text-[0.7rem]">. JS</span>
 				</h1>
-				{/* <span className="text-2xl ">🏎️</span> */}
 			</div>
 			<div className="flex items-center gap-4">
 				<Links />

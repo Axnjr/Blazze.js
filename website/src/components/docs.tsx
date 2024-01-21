@@ -6,7 +6,7 @@ import StartBuilding from "./docs/start";
 export default function Docs() {
     return (
         <div id="docs" className='w-full h-fit relative mt-28 pt-20 text-center m-auto overflow-hidden flex 
-            flex-col justify-center items-center '>
+            flex-col justify-center items-center'>
             <div className='w-fit h-fit p-4 bg-black dark:bg-white rounded-full my-6'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} className="w-16 h-16 dark:stroke-black stroke-white">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
@@ -29,7 +29,8 @@ export default function Docs() {
                 <StartBuilding />
             </section>
 
-            <div className="w-screen h-fit grid place-items-center gap-12 my-6 ">
+            <div className="w-screen h-screen grid place-items-center place-content-center gap-12 
+            hero">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl tracking-tighter font-[700] px-4">
                     By developer, for developer's
                 </h1>

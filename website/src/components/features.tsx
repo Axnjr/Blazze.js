@@ -3,12 +3,12 @@ import { FeatureCard } from './cards'
 const features = [
     { name: "Routing", description: "Keep the logic separated without any setup. Routes are based on the directory structure." },
     { name: "Powered by SWC", description: "Super speed transpilation via the power of Rust." },
-    { name: "Request Caching", description: "Blazze handles caching automatically to optimize large computations." },
+    { name: "Request Caching", description: "Blazze handles caching automatically to optimize large computations in both dev and prod envs." },
     { name: "TypeScript", description: "No configurations and environment setup, just get started directly" },
     { name: "Fast & Robust", description: "Built on top of express, for better developer experience." },
     { name: "Build Optimization", description: "Makes a single optimized bundle for your app" },
     { name: "Easy Setup", description: "Hit `npx blazze-init` to start building your projects." },
-    { name: "No Boiler Plate Code", description: "Install init and start, Nothing else 🚀" },
+    { name: "No Boiler Plate Code", description: "Install, Init and start, no imports, nothing else 🚀" },
 ]
 
 
@@ -55,7 +55,7 @@ export default function Features() {
                                         <div className='group w-full h-52 md:h-44 md:p-8 rounded-xl flex 
 											flex-col items-start justify-center text-left gap-2'>
                                             <h1 className='tracking-tighter font-[700] group-hover:font-black text-xl sm:text-2xl lg:text-3xl m-4 flex items-center bg-gradient-to-r
-                                            from-blue-500 to-fuchsia-500 bg-clip-text group-hover:text-transparent gap-1'>
+                                            from-fuchsia-500 to-amber-200 bg-clip-text group-hover:text-transparent gap-1'>
                                                 <span className='rounded-full w-10 text-base mx-2 h-10 flex items-center justify-center p-2
                                                 bg-black text-white dark:bg-white dark:text-black '>
                                                     {id + 1}
