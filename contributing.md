@@ -2,27 +2,27 @@
 
 👋 Thank you for considering contributing to Blazze.js! I appreciate your interest in making my framework even better. Please take a moment to review this document to understand how you can contribute to Blazze.js.
 
-## Getting Started
+## Developing
 
 Before you start contributing, make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
-1. Fork the Blazze.js repository on GitHub.
-2. Clone your forked repository to your local machine.
+1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device.
 
-```bash
-git clone https://github.com/Axnjr/Blazze.js.git
-```
+2. Create a new branch:
+   ```
+   git checkout -b feat/MY_BRANCH_NAME
+   ```
+   > Use a descriptive and meaningful name for the branch that reflects the purpose of your contribution.
 
-3. Navigate to the project directory.
+3. Install dependencies.
+    ```bash
+    npm install
+    ```
 
-```bash
-cd Blazze.js
-```
-
-4. Install dependencies.
-```bash
-npm install
-```
+4. Start developing
+   ```bash
+   node index.js or npm run dev 
+   ```
 
 ## Making Changes
 
@@ -48,6 +48,29 @@ git push origin feature-branch
 ```
 
 5. Open a pull request on the main Blazze.js repository.
+
+## Commit Guidelines
+
+- We encourage [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format for your commit messages.
+- Keep your commit messages concise, clear, and descriptive.
+- Make sure to include a brief summary of the changes made in the commit.
+
+```
+The commit message should be structured as follows:
+
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+
+```
+Example Commit Message:
+
+```
+feat(cache): Add new caching system
+```
+
 
 ## Coding Standards
 
