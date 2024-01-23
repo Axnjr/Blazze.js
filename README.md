@@ -20,15 +20,23 @@
 A light-weight express framework to write typesafe API's with zero configuration, no boiler-plate blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
 
 ## Features
-- __`😎 Request Caching:`__ Blazze handles caching automatically to optimize large computations.
-- __`🏎️ Powered by SWC:`__ Super speed transpilation via the power of Rust.
-- __`🐣 Easy Setup:`__ Hit `npx blazze-init` to start building your projects.
-- __`💪 TypeScript:`__ Out of the box TS support, no configurations and environment setup, just get started directly.
-- __`📂 Directory based Routing:`__ Keep the logic separated without any setup. Routes are based on the directory structure.
-- __`🚀 Fast & Robust:`__ Built on top of express, for better developer experience.
-- __`💫 No Boiler Plate Code:`__ Install init and start, Nothing else 🚀
-- __`🔥 Build Optimization:`__ Makes a single optimized bundle for your app
-
+- __😎 Request Caching:__ -
+  > Blazze handles caching automatically to optimize large computations.
+- __🏎️ Powered by SWC:__
+  > Super speed transpilation via the power of Rust.
+- __🐣 Easy Setup:__
+  > Hit `npx blazz-init` to start building your projects.
+- __💪 TypeScript:__
+  > Out of the bo TS support, no configurations and environment setup, just get started directly.
+- __📂 Directory basd Routing:__
+  > Keep the loic separated without any setup. Routes are based on the directory structure.
+- __🚀 Fast & Robust:__
+  > Built n to of exprss, for better developer experience.
+- __💫 No Boiler Plate Code:__
+  > Install int and sart, Nothing else 🚀
+- __🔥 Build Opimization:__
+  > Makes a sgle optimizd bundle for your app
+  
 ## How to start ? 
 
 - Install blazze `npm i blazze@latest`
