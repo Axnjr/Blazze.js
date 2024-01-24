@@ -1,9 +1,10 @@
 {
     "name": "blazze",
-    "version": "1.3.3",
+    "version": "1.3.4",
     "description": "The express framework for the web. Write Typesafe API's with no configuration and boiler-plate with dynamic directory based routing and intuitive CLI.",
     "main": "index.js",
     "repository": "Axnjr/Blazze.js",
+    "homepage": "blazze.vercel.app",
     "scripts": {
         "build": "node src/build.js",
         "init": "node src/config.js",
@@ -15,19 +16,23 @@
         "blazze-build": "src/build.js"
     },
     "keywords": [
-        "Express",
+        "Express JS",
+        "CLI",
+        "typescript",
+        "Typesafe",
+        "Nodejs",
+        "javascript",
+        "API Request Caching",
         "Directory router",
-        "API's",
+        "REST APIS",
         "Site builder",
-        "Typesafe api's",
+        "Typesafe APIS",
         "blazze.js",
         "Web server",
-        "swc",
-        "cli",
-        "Rest"
+        "swc"
     ],
     "author": "Yakshit Chhipa - Axn",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
         "@inquirer/prompts": "^3.3.0",
         "@swc/core": "^1.3.102",
