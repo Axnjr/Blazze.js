@@ -25,7 +25,7 @@ if (config.TS) {
     })
 }
 
-const packageVersion = "1.3.2"
+const packageVersion = "1.3.4"
 const scriptToRun =
     process.env.devEnviroment == "true"
         ?
