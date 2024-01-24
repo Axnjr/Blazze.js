@@ -27,11 +27,11 @@ async function BlazeInit() {
         default: "3000"
     });
     const staticRoot = await input({
-        message: chalk.whiteBright("Where would you like to keep your static conetent like html, png's files ?"),
+        message: chalk.whiteBright("Where would you like to keep your static content like HTML, PNG files ?"),
         default: "public"
     });
     const cache = await confirm({
-        message: chalk.whiteBright("Would you like to"+chalk.magentaBright(" enable request caching")+" ?"+chalk.yellowBright(" (expirimental)")),
+        message: chalk.whiteBright("Would you like to"+chalk.magentaBright(" enable request caching")+" ?"+chalk.yellowBright(" (Experimental)")),
         default: false
     });
     const spinner = ora(chalk.bold.rgb(98, 0, 255)(" Configuring your Blazze App ")).start();
