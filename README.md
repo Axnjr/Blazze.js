@@ -17,15 +17,15 @@
   
 </div>
 
-A lightweight express framework to write typesafe APIs with zero configuration, no boilerplate blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
+A lightweight express framework to write typesafe APIs with zero configuration, no boilerplate, and blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
 
 ## Features
 
-- __😎 Request Caching:__ - Blazze handles caching automatically in both Production and Dev Environments. In production it is obviously necessary to optimize large computations, however request caching is taken care of in dev mode as well by Blazze to provide a smooth developer experience, there is no need to revalidate the cache manually everything is handled by Blazze under the hood.
+- __😎 Request Caching:__ - Blazze handles caching automatically in both Production and Dev Environments. In production it is obviously necessary to optimize large computations however, request caching is taken care of in dev mode as well by Blazze to provide a smooth developer experience, there is no need to revalidate the cache manually Blazze handles everything under the hood.
   
-- __🏎️ Powered by SWC:__ - Blazze leavrages Rust-based tool: [Speedy Web Compiler](https://swc.rs/) to transiple Typescript files, so there negligible waiting time after file changes.
+- __🏎️ Powered by SWC:__ - Blazze leverages Rust-based tool: [Speedy Web Compiler](https://swc.rs/) to transpile Typescript files, so there is negligible waiting time after file changes.
   
-- __🐣 Easy Setup:__ - Hit `npx blazz-init` to start building your projects, you'll be asked a few questions for configuring Blazze & that's it Blazze will setup the project for you.
+- __🐣 Easy Setup:__ - Hit `npx blazz-init` to start building your projects, you'll be asked a few questions for configuring Blazze & that's it Blazze will set up the project for you.
   
 - __💪 TypeScript:__ - Out of the box TS support, no configurations and environment setup, just get started directly.
   
@@ -35,24 +35,64 @@ A lightweight express framework to write typesafe APIs with zero configuration, 
   
 - __💫 No Boiler Plate Code:__ - Install init and start, Nothing else 🚀
   
-- __🔥 Build Opimization:__ - Makes a single optimized Expressjs bundle for your complete app
+- __🔥 Build Optimization:__ - Makes a single optimized Expressjs bundle for your complete app
   
-## How to start ? 
+## How to start? 
 
-- Install blazze `npm i blazze@latest`
-- ```npx blazze-init```
+- Install blazze
+  
+  ```
+    npm i blazze@latest
+  ```
+- Run the below command in the terminal.
+  ```
+    npx blazze-init
+  ``` 
 - You will be asked a few questions to configure `blazze.config.js`
+  ```bash
+    PS C:\Users\yaksh\bltest> npx blazze-init      
+    ? What is your project named? myFuckingAPIS
+    ? What will be the root endpoint for your project? api/v5.1/users/i
+    ? Would you like to use TypeScript? yes
+    ? Which port should the server listen to? 3000
+    ? Where would you like to keep your static content like HTML and PNG files? public
+    ? Would you like to enable request caching? (Experimental) yes
+    ✔  Configuring your Blazze App
+    Run commands:
   
-  <img width="" alt="Screenshot 2024-01-11 222945" src="https://github.com/Axnjr/Blazze.js/assets/111436589/c9f09ffe-953e-43a5-bd52-ef2f8ee376e0">
+          - npm i
+          - npm run dev
   
-- Create your API routes in the root-endpoint directory 
+    Success ! Created myFuckingAPIS at C:\Users\yaksh\bltest
+    You are ready to Blazze 🚀. Refer to docs at https://github.com/Axnjr/Blazze.js/main/README.md.
+  ```
+- Create your API routes in the root-endpoint directory
 - Each route can have 5 HTTP method files viz: GET, POST, PUT, PATCH, DELETE
+- Project Structure
+  ```bash
+    myFuckingAPIS
+    ├── api/v5.1/users/i (root-endpoint)
+    │ ├── Route-1
+    │ │ ├── GET.ts
+    │ │ ├── POST.ts
+    │ │ ├── PUT.ts
+    │ │ ├── DELETE.ts
+    │ │ ├── PATCH.ts
+    │ └── Other-routes / ...
+    ├── blazze (for typescript)
+    ├── cache (if enabled)
+    ├── public (static-root)
+    ├── blaze.config.js (from blazze-init)
+    ├── package.json
+    ├── packagelock.json
+    └── ...
+  ```
 - Each file handles specific API request methods
 - You need to export a default normal function from each file
 - These functions get Express Request and Response objects as parameters
-- For nested routes use "@" symbol ex: new/subs/ppl will be -> new@subs@ppl which will have its respective logic
+- For nested routes use the "@" symbol ex: `new/subs/ppl` will be -> `new@subs@ppl` which will have its respective logic
 - This is to avoid deep recursive file watching and being more performant for the system
-- Dynamic routes start with an underscore "_" ex: api/v1/_users 
+- Dynamic routes start with an underscore "_" ex: `api/v1/_users`
 - That's it you are ready to blazze ...
 
 ## Contribute to Blazze
