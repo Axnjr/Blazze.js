@@ -17,25 +17,25 @@
   
 </div>
 
-A light-weight express framework to write typesafe API's with zero configuration, no boiler-plate blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
+A lightweight express framework to write typesafe APIs with zero configuration, no boilerplate blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
 
 ## Features
-- __😎 Request Caching:__ -
-  > Blazze handles caching automatically to optimize large computations.
-- __🏎️ Powered by SWC:__
-  > Super speed transpilation via the power of Rust.
-- __🐣 Easy Setup:__
-  > Hit `npx blazz-init` to start building your projects.
-- __💪 TypeScript:__
-  > Out of the bo TS support, no configurations and environment setup, just get started directly.
-- __📂 Directory basd Routing:__
-  > Keep the loic separated without any setup. Routes are based on the directory structure.
-- __🚀 Fast & Robust:__
-  > Built n to of exprss, for better developer experience.
-- __💫 No Boiler Plate Code:__
-  > Install int and sart, Nothing else 🚀
-- __🔥 Build Opimization:__
-  > Makes a sgle optimizd bundle for your app
+
+- __😎 Request Caching:__ - Blazze handles caching automatically in both Production and Dev Environments. In production it is obviously necessary to optimize large computations, however request caching is taken care of in dev mode as well by Blazze to provide a smooth developer experience, there is no need to revalidate the cache manually everything is handled by Blazze under the hood.
+  
+- __🏎️ Powered by SWC:__ - Blazze leavrages Rust-based tool: [Speedy Web Compiler](https://swc.rs/) to transiple Typescript files, so there negligible waiting time after file changes.
+  
+- __🐣 Easy Setup:__ - Hit `npx blazz-init` to start building your projects, you'll be asked a few questions for configuring Blazze & that's it Blazze will setup the project for you.
+  
+- __💪 TypeScript:__ - Out of the box TS support, no configurations and environment setup, just get started directly.
+  
+- __📂 Directory based Routing:__ - Keep the logic separated without any setup. Routes are based on the directory structure. ex: you will create a dir `user` inside of which you can add your logic for various request methods viz: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
+
+- __🚀 Fast & Robust:__ - Built on top of [Express JS](https://expressjs.com/) and [Helmet JS](https://helmetjs.github.io/), security and efficiency by default.
+  
+- __💫 No Boiler Plate Code:__ - Install init and start, Nothing else 🚀
+  
+- __🔥 Build Opimization:__ - Makes a single optimized Expressjs bundle for your complete app
   
 ## How to start ? 
 
@@ -46,13 +46,13 @@ A light-weight express framework to write typesafe API's with zero configuration
   <img width="" alt="Screenshot 2024-01-11 222945" src="https://github.com/Axnjr/Blazze.js/assets/111436589/c9f09ffe-953e-43a5-bd52-ef2f8ee376e0">
   
 - Create your API routes in the root-endpoint directory 
-- Each route can have 5 http method files viz: GET, POST, PUT, PATCH, DELETE
-- Each files handles specific API request methods
+- Each route can have 5 HTTP method files viz: GET, POST, PUT, PATCH, DELETE
+- Each file handles specific API request methods
 - You need to export a default normal function from each file
 - These functions get Express Request and Response objects as parameters
 - For nested routes use "@" symbol ex: new/subs/ppl will be -> new@subs@ppl which will have its respective logic
-- This is to avoid deep recursive file watching and being more performent for the system
-- Dynamic routes start with a underscore "_" ex: api/v1/_users 
+- This is to avoid deep recursive file watching and being more performant for the system
+- Dynamic routes start with an underscore "_" ex: api/v1/_users 
 - That's it you are ready to blazze ...
 
 ## Contribute to Blazze
