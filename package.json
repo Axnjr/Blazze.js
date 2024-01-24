@@ -1,6 +1,6 @@
 {
     "name": "blazze",
-    "version": "1.3.2",
+    "version": "1.3.3",
     "description": "The express framework for the web. Write Typesafe API's with no configuration and boiler-plate with dynamic directory based routing and intuitive CLI.",
     "main": "index.js",
     "repository": "Axnjr/Blazze.js",
