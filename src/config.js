@@ -63,7 +63,7 @@ async function BlazeInit() {
         - npm run dev
     `))
 
-    console.log(chalk.bold.rgb(98, 0, 255)(`You are ready to Blazze 🚀. Refer docs at http://blazze/docs.`))
+    console.log(chalk.bold.rgb(98, 0, 255)(`You are ready to Blazze 🚀. Refer docs at https://github.com/Axnjr/Blazze.js/main/README.md.`))
 }
 
 
@@ -91,7 +91,7 @@ function getPackageJson(TS,name){
         "name": name,
         "version": "1.0.0",
         "private":true,
-        "description": "Created from create-blazze-app",
+        "description": "Created from blazze-init",
         "main": "index.js",
         "scripts": {
           "test": "echo \"Error: no test specified\" && exit 1",
