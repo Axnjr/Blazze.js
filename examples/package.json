@@ -1,0 +1,26 @@
+{
+    "name": "blazze-Examples",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Created from blazze-init",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "blazze-dev",
+        "build": "blazze-build"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "latest",
+        "typescript": "latest",
+        "blazze": "latest",
+        "dotenv": "latest"
+    },
+    "devDependencies": {
+        "@types/express": "latest",
+        "@types/node": "latest"
+    },
+    "type": "module"
+}
