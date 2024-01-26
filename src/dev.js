@@ -156,6 +156,8 @@ class Blaze {
 			? `file:///${process.cwd()}/blazze/${route + methodFile}.js`
 			: `file:///${process.cwd()}/${config.rootEndPoint}/${route}/${methodFile}.js`;
 
+		console.log(pathToFile)
+
 		const methodCallback = await import(pathToFile);
 
 		if (methodCallback == undefined || methodCallback.default == undefined) {
