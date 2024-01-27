@@ -117,11 +117,12 @@ Write APIs in TypeScript with zero configuration, no boilerplate, request cachin
   ```
 
 ## Upcoming Features
-- GraphQl Support
+- GraphQl integration
 - Elegant Middlewares
 - Rust binding for faster performance
 - Templating Engine
-- Many more ...
+- Web Sockets & Webhooks
+- Polling
 
 ## Contribute to Blazze
 Read the [Contribution guidlines](https://github.com/Axnjr/Blazze.js/blob/main/contributing.md) to begin.
