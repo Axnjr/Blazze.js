@@ -20,6 +20,7 @@ express.response.logResponse = function (reqQuery, reqParams, body, route, metho
 
 	try {
 		writeFileSync(`${config.rootEndPoint}/cache/${temp}.js`, `
+		/* eslint-disable indent */
         export const cache = ${JSON.stringify({
 		Key: {
 			query: reqQuery,
@@ -84,24 +85,29 @@ class Blaze {
 	}
 
 	_dynamicExpressExecuter(method, route) {
-		const methodFile = method.toUpperCase(); const
-			originalRoute = route;
+		const methodFile = method.toUpperCase(), originalRoute = route;
 		// If Route is /subs/join/:id then it is represented as subs@join@_ids
 		route = route.replaceAll('@', '/').replaceAll('_', ':');
-		// to cache requests
-		app.use('/', async (req, res, next) => {
-			this._cacheMiddleware(req, res, next, originalRoute, method);
-		});
+
+		// if caching enabled then to cache requests 
+		if(config.cacheRequests){
+			app.use('/', async (req, res, next) => {
+				this._cacheMiddleware(req, res, next, originalRoute, method);
+			});
+		}
+
 		// subs/join/:ids
 		app[method](`/${config.rootEndPoint}/${route}`, async (req, res) => {
-			if (await this._checkRequestCache(req, res, originalRoute, method)) { return; }
-			// if req was in cache then return cached value
+			if(config.cacheRequests){
+				// if req was in cache then return cached value
+				if (await this._checkRequestCache(req, res, originalRoute, method)) { return; }
+			}
 			// if req was not in cache then move it after executing
 			const getCallback = await this._getMethodCallback(originalRoute, method);
-			try {
-				// dynamic route params can be accessed from req.params.paramName ex : req.params.users
-				await getCallback(req, res);
-			} catch (error) { // error in function
+
+			try { await getCallback(req, res) } 
+			// catch error in function
+			catch (error) { 
 				errorRed(`[Blaze Error at ${methodFile} in route ${route}] - ${error}`);
 				res.status(500).send(JSON.stringify({
 					message: 'Something went wrong !',
