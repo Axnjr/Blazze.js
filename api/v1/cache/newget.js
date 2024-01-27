@@ -1,13 +1,11 @@
 
+		/* eslint-disable indent */
         export const cache = {
     "Key": {
         "query": {
-            "uid": "12345678"
+            "q": "\"hi\""
         },
-        "params": {
-            "ids": "345dfgh"
-        }
+        "params": {}
     },
-    "Value": "{\"Mes\":\"Dynamic nested route test with swc.\",\"Status\":\"ok\",\"Code\":200,\"Query\":{\"uid\":\"12345678\"},\"Params\":{\"ids\":\"345dfgh\"}}"
+    "Value": "123456789"
 }
-    
