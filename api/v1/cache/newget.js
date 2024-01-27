@@ -1,9 +1,13 @@
-export const cache = {
-  Key: {
-    query: {
-      q: '"hi, lovely day !"',
+
+        export const cache = {
+    "Key": {
+        "query": {
+            "uid": "12345678"
+        },
+        "params": {
+            "ids": "345dfgh"
+        }
     },
-    params: {},
-  },
-  Value: '{"Data":{"author":"1","content":"The sentence \\"hi, lovely day !\\" has a positive sentiment. The word \\"lovely\\" is a positive adjective, and the exclamation point indicates excitement or happiness."},"Query":"\\"hi, lovely day !\\""}',
-};
+    "Value": "{\"Mes\":\"Dynamic nested route test with swc.\",\"Status\":\"ok\",\"Code\":200,\"Query\":{\"uid\":\"12345678\"},\"Params\":{\"ids\":\"345dfgh\"}}"
+}
+    
