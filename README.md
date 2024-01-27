@@ -17,7 +17,7 @@
   
 </div>
 
-A lightweight express framework to write typesafe APIs with zero configuration, no boilerplate, and blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
+A lightweight powerful express framework to write typesafe APIs with zero configuration, no boilerplate, and blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
 
 ## Features
 
