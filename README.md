@@ -17,7 +17,7 @@
   
 </div>
 
-A lightweight powerful express framework to write typesafe APIs with zero configuration, no boilerplate, and blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
+Write APIs in TypeScript with zero configuration, no boilerplate, request caching, and blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
 
 ## Features
 
@@ -27,7 +27,7 @@ A lightweight powerful express framework to write typesafe APIs with zero config
   
 - __🐣 Easy Setup:__ - Hit `npx blazz-init` to start building your projects, you'll be asked a few questions for configuring Blazze & that's it Blazze will set up the project for you.
   
-- __💪 TypeScript:__ - Out of the box TS support, no configurations and environment setup, just get started directly.
+- __💪 TypeScript:__ - Out-of-the-box TS support, no configurations, and environment setup, just get started directly.
   
 - __📂 Directory based Routing:__ - Keep the logic separated without any setup. Routes are based on the directory structure. ex: you will create a dir `user` inside of which you can add your logic for various request methods viz: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
 
