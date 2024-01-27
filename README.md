@@ -17,7 +17,7 @@
   
 </div>
 
-A lightweight express framework to write typesafe APIs with zero configuration, no boilerplate, and blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
+Write APIs in TypeScript with zero configuration, no boilerplate, request caching, and blazingly fast. Blazze.js is a powerful and lightweight JavaScript framework designed to simplify web development. With a focus on simplicity and performance, Blazze.js provides a set of features that make building web applications a breeze.
 
 ## Features
 
@@ -27,7 +27,7 @@ A lightweight express framework to write typesafe APIs with zero configuration, 
   
 - __🐣 Easy Setup:__ - Hit `npx blazz-init` to start building your projects, you'll be asked a few questions for configuring Blazze & that's it Blazze will set up the project for you.
   
-- __💪 TypeScript:__ - Out of the box TS support, no configurations and environment setup, just get started directly.
+- __💪 TypeScript:__ - Out-of-the-box TS support, no configurations, and environment setup, just get started directly.
   
 - __📂 Directory based Routing:__ - Keep the logic separated without any setup. Routes are based on the directory structure. ex: you will create a dir `user` inside of which you can add your logic for various request methods viz: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
 
@@ -93,7 +93,35 @@ A lightweight express framework to write typesafe APIs with zero configuration, 
 - For nested routes use the "@" symbol ex: `new/subs/ppl` will be -> `new@subs@ppl` which will have its respective logic
 - This is to avoid deep recursive file watching and being more performant for the system
 - Dynamic routes start with an underscore "_" ex: `api/v1/_users`
-- That's it you are ready to blazze ...
+- That's it you are ready to Blazze 🚀, below is an example of `get` request for dynamic route `user`.
+  ```ts
+  // api/v1/_user/GET.ts
+  
+  import { Request, Response } from "express"
+
+  export default async function (req:Request, res:Response){
+      let data, r = req.query.q
+      try {
+          data = await fetch(`https://freeaiapi.vercel.app/api/Sentiments?query='${r}'`)
+      } catch (error) {
+          data = error
+      }
+  
+      let t = await data.json()
+  
+      res.json({
+          Data:t,
+          Query:r
+      });
+  }
+  ```
+
+## Upcoming Features
+- GraphQl Support
+- Elegant Middlewares
+- Rust binding for faster performance
+- Templating Engine
+- Many more ...
 
 ## Contribute to Blazze
 Read the [Contribution guidlines](https://github.com/Axnjr/Blazze.js/blob/main/contributing.md) to begin.
