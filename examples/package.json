@@ -13,10 +13,10 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "blazze": "^1.3.4",
+        "dotenv": "latest",
         "express": "latest",
-        "typescript": "latest",
-        "blazze": "latest",
-        "dotenv": "latest"
+        "typescript": "latest"
     },
     "devDependencies": {
         "@types/express": "latest",
