@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable no-undef */
 import chalk from 'chalk';
 import nodemon from 'nodemon';
 import swc from '@swc/core';
@@ -60,9 +59,12 @@ if (config.TS) {
 }
 
 const packageVersion = '1.3.4';
+
 const scriptToRun = process.env.devEnviroment == 'true'
 	? 'src/dev.js'
-	: `${config.resolvePath}/src/dev.js`;
+	: `${config.resolvePath}/src/dev.js`
+;
+
 await nodemon({
 	script: scriptToRun,
 	ext: config.TS ? 'ts,js' : 'js', // File extensions to watch for changes

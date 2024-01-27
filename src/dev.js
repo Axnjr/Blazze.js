@@ -18,15 +18,19 @@ express.response.logResponse = function (reqQuery, reqParams, body, route, metho
 
 	const temp = route + method;
 
-	writeFileSync(`${config.rootEndPoint}/cache/${temp}.js`, `
+	try {
+		writeFileSync(`${config.rootEndPoint}/cache/${temp}.js`, `
         export const cache = ${JSON.stringify({
 		Key: {
 			query: reqQuery,
 			params: reqParams,
 		},
 		Value: body,
-	}, null, 4)}
-    `);
+	}, null, 4)}`);
+	} catch (error) {
+		infoGreyDev(error)
+	}
+
 };
 
 class Blaze {
@@ -50,22 +54,22 @@ class Blaze {
 	_startBlazeServer() {
 		for (const [method, routes] of Object.entries(this.cache)) {
 			switch (true) {
-				case method == 'GET':
-					this._registerRequests(routes, 'get');
-					break;
-				case method == 'POST':
-					this._registerRequests(routes, 'post');
-					break;
-				case method == 'DELETE':
-					this._registerRequests(routes, 'delete');
-					break;
-				case method == 'PUT':
-					this._registerRequests(routes, 'put');
-					break;
-				case method == 'PATCH':
-					this._registerRequests(routes, 'patch');
-					break;
-				default: break;
+			case method == 'GET':
+				this._registerRequests(routes, 'get');
+				break;
+			case method == 'POST':
+				this._registerRequests(routes, 'post');
+				break;
+			case method == 'DELETE':
+				this._registerRequests(routes, 'delete');
+				break;
+			case method == 'PUT':
+				this._registerRequests(routes, 'put');
+				break;
+			case method == 'PATCH':
+				this._registerRequests(routes, 'patch');
+				break;
+			default: break;
 			}
 		}
 
@@ -145,6 +149,7 @@ class Blaze {
 		// this is for dev edge case swc transpilation problem
 		// let b = func.toString().includes("return")
 		// for arrow functions hasOwnPoperty would be false and true for normal funcs
+		// eslint-disable-next-line no-prototype-builtins
 		const t = func.prototype == undefined && !func.hasOwnProperty('arguments');
 		// console.log("Checking if arrow func",func.toString(),t)
 		// return b || t
@@ -152,11 +157,13 @@ class Blaze {
 	}
 
 	async _getMethodCallback(route, methodFile) {
+
 		const pathToFile = this.lang == 'ts'
 			? `file:///${process.cwd()}/blazze/${route + methodFile}.js`
-			: `file:///${process.cwd()}/${config.rootEndPoint}/${route}/${methodFile}.js`;
+			: `file:///${process.cwd()}/${config.rootEndPoint}/${route}/${methodFile}.js`
+		;
 
-		console.log(pathToFile)
+		infoGreyDev(pathToFile)
 
 		const methodCallback = await import(pathToFile);
 
