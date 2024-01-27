@@ -93,7 +93,35 @@ Write APIs in TypeScript with zero configuration, no boilerplate, request cachin
 - For nested routes use the "@" symbol ex: `new/subs/ppl` will be -> `new@subs@ppl` which will have its respective logic
 - This is to avoid deep recursive file watching and being more performant for the system
 - Dynamic routes start with an underscore "_" ex: `api/v1/_users`
-- That's it you are ready to blazze ...
+- That's it you are ready to Blazze 🚀, below is an example of `get` request for dynamic route `user`.
+  ```ts
+  // api/v1/_user/GET.ts
+  
+  import { Request, Response } from "express"
+
+  export default async function (req:Request, res:Response){
+      let data, r = req.query.q
+      try {
+          data = await fetch(`https://freeaiapi.vercel.app/api/Sentiments?query='${r}'`)
+      } catch (error) {
+          data = error
+      }
+  
+      let t = await data.json()
+  
+      res.json({
+          Data:t,
+          Query:r
+      });
+  }
+  ```
+
+## Upcoming Features
+- GraphQl Support
+- Elegant Middlewares
+- Rust binding for faster performance
+- Templating Engine
+- Many more ...
 
 ## Contribute to Blazze
 Read the [Contribution guidlines](https://github.com/Axnjr/Blazze.js/blob/main/contributing.md) to begin.
