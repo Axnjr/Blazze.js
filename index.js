@@ -59,6 +59,8 @@ const scriptToRun = process.env.devEnviroment == 'true'
 	: `${config.resolvePath}/src/dev.js`
 ;
 
+console.log("SCRIPT:",scriptToRun);
+
 await nodemon({
 	script: scriptToRun,
 	ext: config.TS ? 'ts,js' : 'js', // File extensions to watch for changes
@@ -71,7 +73,7 @@ await nodemon({
 		// however we are just intrested in the first value of the array 
 		let fileName = changedFiles[0].replaceAll('\\', '/').split(config.rootEndPoint);
 
-		infoGreyDev("Changed file on restart:",fileName)
+		infoGreyDev("Changed file on restart:",fileName,changedFiles)
 		// whenever there is a new request we revalidate the cache 
 		// but we dont want to do anything on this event !
 		if (changedFiles.includes('cache')) { return; }
