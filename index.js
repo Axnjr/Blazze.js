@@ -86,7 +86,7 @@ await nodemon({
 		// if caching is enabled and some files have changed then revalidate the request cache.
 		if(config.cacheRequests){
 			try {
-				const pathToCacheFile = `./${config.rootEndPoint}/cache/${fileName.replaceAll('/', '').toLowerCase().replace('ts', 'js')}`;
+				const pathToCacheFile = `./${config.rootEndPoint}/cache/${fileName[1].replaceAll('/', '').toLowerCase().replace('ts', 'js')}`;
 				if (existsSync(pathToCacheFile)) {
 					unlinkSync(pathToCacheFile);
 				}
