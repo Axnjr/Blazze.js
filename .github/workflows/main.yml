@@ -26,7 +26,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          target: src
           load: true
       -
         name: Build and push
