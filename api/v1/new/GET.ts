@@ -7,7 +7,6 @@ export default async function (req:Request,res:Response){
     } catch (error) {
         data = error
     }
-
     let t = await data.json()
 
     res.json({
