@@ -33,5 +33,4 @@ jobs:
         with:
           context: .
           push: true
-          target: prod
           tags: ${{ secrets.DOCKER_USERNAME }}/blazze.js:v1.3.5
