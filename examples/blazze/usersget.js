@@ -127,11 +127,52 @@ export default function(req, res) {
 }
 function _ref() {
     _ref = _async_to_generator(function(req, res) {
+        var data, r, error, t;
         return _ts_generator(this, function(_state) {
-            res.send("Testing !!");
-            return [
-                2
-            ];
+            switch(_state.label){
+                case 0:
+                    r = req.query.q;
+                    _state.label = 1;
+                case 1:
+                    _state.trys.push([
+                        1,
+                        3,
+                        ,
+                        4
+                    ]);
+                    return [
+                        4,
+                        fetch("https://freeaiapi.vercel.app/api/Sentiments?query='".concat(r, "'"))
+                    ];
+                case 2:
+                    data = _state.sent();
+                    return [
+                        3,
+                        4
+                    ];
+                case 3:
+                    error = _state.sent();
+                    data = error;
+                    return [
+                        3,
+                        4
+                    ];
+                case 4:
+                    return [
+                        4,
+                        data.json()
+                    ];
+                case 5:
+                    t = _state.sent();
+                    // res.json({
+                    //     Data:t,
+                    //     Query:r
+                    // });
+                    res.send("AGAIN BACK TO SENDING HTML !!");
+                    return [
+                        2
+                    ];
+            }
         });
     });
     return _ref.apply(this, arguments);

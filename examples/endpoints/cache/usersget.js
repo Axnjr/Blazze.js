@@ -1,9 +1,11 @@
 
+		/* eslint-disable indent */
         export const cache = {
     "Key": {
-        "query": {},
+        "query": {
+            "q": "\"hello world !\""
+        },
         "params": {}
     },
-    "Value": "Testing !!"
+    "Value": "AGAIN BACK TO SENDING HTML !!"
 }
-    

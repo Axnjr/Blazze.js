@@ -13,7 +13,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "blazze": "^1.3.4",
+        "blazze": "^1.3.6",
         "dotenv": "latest",
         "express": "latest",
         "typescript": "latest"
