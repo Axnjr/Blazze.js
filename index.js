@@ -52,14 +52,14 @@ if (config.TS) {
 	});
 }
 
-const packageVersion = '1.3.5';
+const packageVersion = '1.4.1';
 
 const scriptToRun = process.env.devEnviroment == 'true'
 	? 'src/dev.js'
 	: `${config.resolvePath}/src/dev.js`
 ;
 
-console.log("SCRIPT:",scriptToRun);
+// console.log("SCRIPT:",scriptToRun);
 
 await nodemon({
 	script: scriptToRun,
