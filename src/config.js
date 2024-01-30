@@ -30,7 +30,7 @@ async function BlazeInit() {
 		default: 'public',
 	});
 	const cache = await confirm({
-		message: chalk.whiteBright(`Would you like to${chalk.magentaBright(' enable request caching')} ?${chalk.yellowBright(' (Experimental)')}`),
+		message: chalk.whiteBright(`Would you like to${chalk.magentaBright(' enable request caching')} ?${chalk.greenBright(' (Recomended)')}`),
 		default: false,
 	});
 	const spinner = ora(chalk.bold.rgb(98, 0, 255)(' Configuring your Blazze App ')).start();
