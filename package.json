@@ -1,10 +1,10 @@
 {
     "name": "blazze",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "The express framework for the web. Write Typesafe API's with no configuration and boiler-plate with dynamic directory based routing and intuitive CLI.",
     "main": "index.js",
     "repository": "Axnjr/Blazze.js",
-    "homepage": "blazze.vercel.app",
+    "homepage": "blazzejs.xyz",
     "scripts": {
         "build": "node src/build.js",
         "init": "node src/config.js",
