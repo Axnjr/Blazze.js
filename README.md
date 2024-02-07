@@ -121,8 +121,7 @@ Write APIs in TypeScript with zero configuration, no boilerplate, request cachin
 - Elegant Middlewares
 - Rust binding for faster performance
 - Templating Engine
-- Web Sockets & Webhooks
-- Polling
+- Web Sockets
 
 ## Contribute to Blazze
 Read the [Contribution guidlines](https://github.com/Axnjr/Blazze.js/blob/main/contributing.md) to begin.
